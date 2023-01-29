@@ -12,4 +12,17 @@ public record RadioBroadcaster(String name, LinkedHashSet<WorkOnRadioExperience>
     public RadioBroadcaster(String name) {
         this(name, new LinkedHashSet<>(), new LinkedHashSet<>());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if(!(o instanceof Broadcaster broadcaster)) return false;
+        return name.equals(broadcaster.name());
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }
