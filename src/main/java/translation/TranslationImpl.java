@@ -1,6 +1,8 @@
 package translation;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import translation.part.CommercialPart;
 import translation.part.Part;
@@ -11,13 +13,12 @@ import java.util.Objects;
 
 @ToString
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TranslationImpl implements Translation {
     private double price;
 
     private double minuteDuration;
     private final Deque<Part> parts = new ArrayDeque<>();
-
-    private TranslationImpl(){}
     @Override
     public Deque<Part> getParts() {
         return new ArrayDeque<>(parts);
