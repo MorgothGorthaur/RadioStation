@@ -1,5 +1,7 @@
 package translation;
 
+import exception.AllTranslationTimeIsUsedException;
+import exception.TooBigCommercialTimeException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -76,8 +78,8 @@ public class TranslationImpl implements Translation {
         }
 
         private void checkConditions() {
-            if(freeTime < 0) throw new RuntimeException();
-            if(commercialTime > minuteDuration /2) throw new RuntimeException();
+            if(freeTime < 0) throw new AllTranslationTimeIsUsedException();
+            if(commercialTime > minuteDuration /2) throw new TooBigCommercialTimeException(commercialTime, minuteDuration);
         }
     }
 }
