@@ -1,14 +1,15 @@
 package dao;
 
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.*;
-
+@RequiredArgsConstructor
 public class DaoImpl implements RadioStationDao {
-    private static final String FILE_NAME = "saves";
+    private final String FILE_NAME;
     @Override
     @SneakyThrows
     public void write(Deque<Broadcaster> broadcasters){
