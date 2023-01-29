@@ -50,6 +50,7 @@ public class TranslationImpl implements Translation {
             this.minuteDuration = minuteDuration;
             this.freeTime = minuteDuration;
         }
+
         public Builder addPart(Part part) {
             freeTime -= part.minuteDuration();
             if(part instanceof CommercialPart commercialPart) {
@@ -57,6 +58,20 @@ public class TranslationImpl implements Translation {
                 commercialTime += commercialPart.minuteDuration();
             }
             checkConditions();
+            parts.add(part);
+            return this;
+        }
+
+        public Builder addParts(Deque<Part> parts) {
+            for (var part : parts) addPart(part);
+            return this;
+        }
+        public Translation build() {
+            var translation = new TranslationImpl();
+            translation.minuteDuration = minuteDuration;
+            translation.parts.addAll(parts);
+            translation.price = price;
+            return translation;
         }
 
         private void checkConditions() {
