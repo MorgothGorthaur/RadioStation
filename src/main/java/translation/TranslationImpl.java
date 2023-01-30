@@ -2,13 +2,11 @@ package translation;
 
 import exception.AllTranslationTimeIsUsedException;
 import exception.TooBigCommercialTimeException;
-import lombok.*;
 import translation.part.CommercialPart;
 import translation.part.Part;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Objects;
 
 
 public record TranslationImpl(double price, double minuteDuration, Deque<Part> parts) implements Translation {
