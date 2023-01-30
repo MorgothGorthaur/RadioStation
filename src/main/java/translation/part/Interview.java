@@ -8,6 +8,6 @@ public record Interview(String interviewee, double minuteDuration) implements Co
 
     @Override
     public String toString() {
-        return "I " + interviewee + " " + minuteDuration;
+        return "I, " + interviewee + ", " + minuteDuration;
     }
 }

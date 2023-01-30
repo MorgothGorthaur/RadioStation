@@ -51,13 +51,13 @@ public class LexerImpl implements Lexer {
     }
 
     private Deque<Part> interpretParts(String substring) {
-        var partsArr = substring.split(", ");
+        var partsArr = substring.split(" \\+ ");
         var parts = new ArrayDeque<Part>();
         for (var p : partsArr) {
             parts.add(switch (p.charAt(0)) {
-                case 'M' -> interpretMusic(p.split(" "));
-                case 'I' -> interpretInterview(p.split(" "));
-                case 'A' -> interpretAdvertising(p.split(" "));
+                case 'M' -> interpretMusic(p.split(", "));
+                case 'I' -> interpretInterview(p.split(", "));
+                case 'A' -> interpretAdvertising(p.split(", "));
                 default -> throw new IllegalStateException("Unexpected value: " + p.charAt(0));
             });
         }

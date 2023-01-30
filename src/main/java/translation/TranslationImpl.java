@@ -42,7 +42,9 @@ public class TranslationImpl implements Translation {
 
     @Override
     public String toString() {
-        return "T " + price + " " + minuteDuration + " " + parts;
+        var str = new StringBuilder("T " + price + " " + minuteDuration + " [");
+        for (var part : parts) str.append(part).append(" + ");
+        return str.append("]").toString();
     }
     public static class Builder {
         private final double minuteDuration;

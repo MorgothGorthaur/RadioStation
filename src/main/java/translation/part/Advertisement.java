@@ -8,6 +8,6 @@ public record Advertisement(String productName, double minuteDuration) implement
 
     @Override
     public String toString() {
-        return "A " + productName + " " + minuteDuration;
+        return "A, " + productName + ", " + minuteDuration;
     }
 }
