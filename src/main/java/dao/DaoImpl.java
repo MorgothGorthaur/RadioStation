@@ -18,7 +18,7 @@ public class DaoImpl implements RadioStationDao {
 
     @Override
     @SneakyThrows
-    public void write(Deque<Broadcaster> broadcasters) {
+    public void write(Iterable<Broadcaster> broadcasters) {
         try (var writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (var broadcaster : broadcasters) writer.append(broadcaster.toString()).append("\n");
         }
