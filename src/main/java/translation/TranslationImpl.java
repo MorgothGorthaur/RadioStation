@@ -2,10 +2,7 @@ package translation;
 
 import exception.AllTranslationTimeIsUsedException;
 import exception.TooBigCommercialTimeException;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import translation.part.CommercialPart;
 import translation.part.Part;
 
@@ -15,12 +12,12 @@ import java.util.Objects;
 
 @ToString
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class TranslationImpl implements Translation {
     private double price;
 
     private double minuteDuration;
-    private final Deque<Part> parts = new ArrayDeque<>();
+    private  Deque<Part> parts;
     @Override
     public Deque<Part> getParts() {
         return new ArrayDeque<>(parts);
@@ -74,11 +71,7 @@ public class TranslationImpl implements Translation {
             return this;
         }
         public Translation build() {
-            var translation = new TranslationImpl();
-            translation.minuteDuration = minuteDuration;
-            translation.parts.addAll(parts);
-            translation.price = price;
-            return translation;
+            return new TranslationImpl(price, minuteDuration, parts);
         }
 
         private void checkConditions() {

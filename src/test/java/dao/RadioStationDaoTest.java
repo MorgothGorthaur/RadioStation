@@ -20,7 +20,8 @@ class RadioStationDaoTest {
     void write() {
         var br = new RadioBroadcaster("F", new LinkedHashSet<>(List.of(new WorkOnRadioExperience("f", 5))));
         var translation = new TranslationImpl.Builder(5).addPart(new Music("g", "G", 3)).addPart(new Music("6","6", 2)).build();
-        br.translations().add(translation);
+        var translation_2 = new TranslationImpl.Builder(5).addPart(new Music("g", "d", 3)).addPart(new Music("6","6", 2)).build();
+        br.translations().addAll(List.of(translation, translation_2));
         dao.write(new ArrayDeque<>(List.of(br, br)));
 
     }
