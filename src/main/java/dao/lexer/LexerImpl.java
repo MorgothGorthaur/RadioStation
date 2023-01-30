@@ -23,7 +23,6 @@ public class LexerImpl implements Lexer {
     }
 
     private GuestBroadcaster interpretGuestBroadcaster(String stringValue) {
-        System.out.println(stringValue);
         return null;
     }
 
@@ -36,6 +35,7 @@ public class LexerImpl implements Lexer {
 
     private LinkedHashSet<Translation> interpretTranslations(String substring) {
         var translations = new LinkedHashSet<Translation>();
+        if(substring.equals("")) return translations;
         var translationsString = substring.split("\\|");
         for (var t : translationsString) translations.add(interpretTranslation(t));
         return translations;
@@ -53,6 +53,7 @@ public class LexerImpl implements Lexer {
     private Deque<Part> interpretParts(String substring) {
         var partsArr = substring.split("=>");
         var parts = new ArrayDeque<Part>();
+        if(substring.equals("")) return parts;
         for (var p : partsArr) {
             parts.add(switch (p.charAt(0)) {
                 case 'M' -> interpretMusic(p.split(", "));
@@ -82,6 +83,7 @@ public class LexerImpl implements Lexer {
 
     private LinkedHashSet<WorkOnRadioExperience> interpretExperiences(String substring) {
         var experiencesSet = new LinkedHashSet<WorkOnRadioExperience>();
+        if(substring.equals("")) return experiencesSet;
         var expArr = substring.split("=>");
         for (var experience : expArr) {
             var elem = experience.split(", ");

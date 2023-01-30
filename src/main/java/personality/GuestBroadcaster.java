@@ -14,7 +14,7 @@ public record GuestBroadcaster(String name, String resume,
 
     @Override
     public String toString(){
-        var str = new StringBuilder("G " + name + " " + resume + " ");
+        var str = new StringBuilder("G, " + name + ", " + resume + ", ");
         for (var translation : translations) str.append(translation).append("|");
         return str.toString();
     }
