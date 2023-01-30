@@ -16,8 +16,8 @@ public class LexerImpl implements Lexer {
     @Override
     public Broadcaster interpret(String inputString) {
         return switch (inputString.charAt(0)) {
-            case 'R' -> interpretRadioBroadcaster(inputString.substring(1).strip());
-            case 'G' -> interpretGuestBroadcaster(inputString.substring(1).strip());
+            case 'R' -> interpretRadioBroadcaster(inputString.substring(2).strip());
+            case 'G' -> interpretGuestBroadcaster(inputString.substring(2).strip());
             default -> throw new IllegalArgumentException();
         };
     }
@@ -28,7 +28,7 @@ public class LexerImpl implements Lexer {
     }
 
     private RadioBroadcaster interpretRadioBroadcaster(String stringValue) {
-        var name = stringValue.substring(0, stringValue.indexOf(" "));
+        var name = stringValue.substring(0, stringValue.indexOf(", "));
         var experiences = interpretExperiences(stringValue.substring(stringValue.indexOf("[") + 1, stringValue.indexOf("]")));
         var translations = interpretTranslations(stringValue.substring(stringValue.indexOf("]") + 1).strip());
         return new RadioBroadcaster(name, experiences, translations);
@@ -51,7 +51,7 @@ public class LexerImpl implements Lexer {
     }
 
     private Deque<Part> interpretParts(String substring) {
-        var partsArr = substring.split(" \\+ ");
+        var partsArr = substring.split("=>");
         var parts = new ArrayDeque<Part>();
         for (var p : partsArr) {
             parts.add(switch (p.charAt(0)) {
@@ -82,9 +82,9 @@ public class LexerImpl implements Lexer {
 
     private LinkedHashSet<WorkOnRadioExperience> interpretExperiences(String substring) {
         var experiencesSet = new LinkedHashSet<WorkOnRadioExperience>();
-        var expArr = substring.split(", ");
+        var expArr = substring.split("=>");
         for (var experience : expArr) {
-            var elem = experience.split(" ");
+            var elem = experience.split(", ");
             if(elem.length != 3 && !elem[0].equals("E")) throw new IllegalArgumentException();
             experiencesSet.add(new WorkOnRadioExperience(elem[1].strip(), convertToDouble(elem[2].strip())));
         }
