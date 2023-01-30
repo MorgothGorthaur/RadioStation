@@ -10,7 +10,6 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Objects;
 
-@ToString
 @Getter
 @AllArgsConstructor
 public class TranslationImpl implements Translation {
