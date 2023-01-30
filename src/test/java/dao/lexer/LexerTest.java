@@ -20,8 +20,6 @@ class LexerTest {
     Lexer lexer = new LexerImpl();
     @Test
     void testInterpret() {
-//        var broadcaster = new RadioBroadcaster("Victor Tarasov", new LinkedHashSet<>(List.of(new WorkOnRadioExperience("radio rock", 2)
-//                , new WorkOnRadioExperience("punk rock radio", 4))));
         var broadcaster = new GuestBroadcaster("v f", "fff");
         var translation = new TranslationImpl.Builder(5)
                 .addPart(new Music("singer", "song", 2.3))

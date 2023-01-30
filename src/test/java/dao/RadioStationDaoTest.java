@@ -1,5 +1,6 @@
 package dao;
 
+import dao.lexer.LexerImpl;
 import org.junit.jupiter.api.Test;
 import personality.Broadcaster;
 import personality.RadioBroadcaster;
@@ -15,7 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RadioStationDaoTest {
-    RadioStationDao dao = new DaoImpl("save");
+    RadioStationDao dao = new DaoImpl("save", new LexerImpl());
     @Test
     void write() {
         var br = new RadioBroadcaster("F", new LinkedHashSet<>(List.of(new WorkOnRadioExperience("f", 5))));

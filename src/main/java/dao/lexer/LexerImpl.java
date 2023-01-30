@@ -1,4 +1,5 @@
 package dao.lexer;
+import exception.*;
 import personality.Broadcaster;
 import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
@@ -18,7 +19,7 @@ public class LexerImpl implements Lexer {
         return switch (inputString.charAt(0)) {
             case 'R' -> interpretRadioBroadcaster(inputString.substring(2).strip());
             case 'G' -> interpretGuestBroadcaster(inputString.substring(2).strip());
-            default -> throw new IllegalArgumentException();
+            default -> throw new UnknownBroadcasterException(inputString.charAt(0));
         };
     }
 
@@ -46,7 +47,7 @@ public class LexerImpl implements Lexer {
     }
 
     private Translation interpretTranslation(String translationString) {
-        if(translationString.charAt(0) != 'T') throw new IllegalArgumentException();
+        if(translationString.charAt(0) != 'T') throw new ThereMustBeTranslationException(translationString);
         var elems = translationString.split(" ");
         var price = convertToDouble(elems[1]);
         var duration = convertToDouble(elems[2]);
@@ -63,25 +64,24 @@ public class LexerImpl implements Lexer {
                 case 'M' -> interpretMusic(p.split(", "));
                 case 'I' -> interpretInterview(p.split(", "));
                 case 'A' -> interpretAdvertising(p.split(", "));
-                default -> throw new IllegalStateException("Unexpected value: " + p.charAt(0));
+                default -> throw new UnknownPartTypeException(p.charAt(0));
             });
         }
         return parts;
     }
 
     private Part interpretAdvertising(String[] elems) {
-
-        if(elems.length != 3) throw new IllegalArgumentException();
+        if(elems.length != 3) throw new CantReadAdvertisingException(Arrays.toString(elems));
         return new Advertisement(elems[1], convertToDouble(elems[2]));
     }
 
     private Part interpretInterview(String[] elems) {
-        if(elems.length != 3) throw  new IllegalArgumentException();
+        if(elems.length != 3) throw  new CantReadInterviewException(Arrays.toString(elems));
         return new Interview(elems[1], convertToDouble(elems[2]));
     }
 
     private Part interpretMusic(String[] elems) {
-        if(elems.length != 4) throw new IllegalArgumentException();
+        if(elems.length != 4) throw new CantReadMusicException(Arrays.toString(elems));
         return new Music(elems[1], elems[2], convertToDouble(elems[3]));
     }
 
@@ -91,7 +91,7 @@ public class LexerImpl implements Lexer {
         var expArr = substring.split("=>");
         for (var experience : expArr) {
             var elem = experience.split(", ");
-            if(elem.length != 3 && !elem[0].equals("E")) throw new IllegalArgumentException();
+            if(elem.length != 3 && !elem[0].equals("E")) throw new CantReadExperienceException(experience);
             experiencesSet.add(new WorkOnRadioExperience(elem[1].strip(), convertToDouble(elem[2].strip())));
         }
         return experiencesSet;
