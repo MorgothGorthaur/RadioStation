@@ -1,6 +1,7 @@
 package dao.lexer;
 
 import org.junit.jupiter.api.Test;
+import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
 import personality.WorkOnRadioExperience;
 import translation.Translation;
@@ -19,14 +20,14 @@ class LexerTest {
     Lexer lexer = new LexerImpl();
     @Test
     void testInterpret() {
-        var broadcaster = new RadioBroadcaster("Victor Tarasov", new LinkedHashSet<>(List.of(new WorkOnRadioExperience("radio rock", 2)
-                , new WorkOnRadioExperience("punk rock radio", 4))));
+//        var broadcaster = new RadioBroadcaster("Victor Tarasov", new LinkedHashSet<>(List.of(new WorkOnRadioExperience("radio rock", 2)
+//                , new WorkOnRadioExperience("punk rock radio", 4))));
+        var broadcaster = new GuestBroadcaster("v f", "fff");
         var translation = new TranslationImpl.Builder(5)
-//                .addPart(new Music("singer", "song", 2.3))
-//                        .addPart(new Interview("Misha", 1.2))
-//                                .addPart(new Advertisement("product fff", 0.8))
-//                                        .addPart(new Music("another", "g", 0.7)).build();
-                .build();
+                .addPart(new Music("singer", "song", 2.3))
+                        .addPart(new Interview("Misha", 1.2))
+                                .addPart(new Advertisement("product fff", 0.8))
+                                        .addPart(new Music("another", "g", 0.7)).build();
         var translation_2 = new TranslationImpl.Builder(5).addPart(new Music("singer", "song", 2.3))
                 .addPart(new Interview("Vasya", 1.2))
                 .addPart(new Advertisement("product", 0.8))
