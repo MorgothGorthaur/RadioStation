@@ -15,9 +15,9 @@ public record RadioBroadcaster(String name, LinkedHashSet<WorkOnRadioExperience>
 
     @Override
     public String toString() {
-        var str = new StringBuilder("R, " + name + ", [");
+        var str = new StringBuilder("R, " + name + ", (");
         for (var exp : experiences) str.append(exp).append("=>");
-        str.append("]");
+        str.append("), ");
         for (var translation : translations) str.append(translation).append("|");
         return str.toString();
     }

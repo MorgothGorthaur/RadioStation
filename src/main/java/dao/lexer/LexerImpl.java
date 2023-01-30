@@ -29,8 +29,8 @@ public class LexerImpl implements Lexer {
 
     private RadioBroadcaster interpretRadioBroadcaster(String stringValue) {
         var name = stringValue.substring(0, stringValue.indexOf(", "));
-        var experiences = interpretExperiences(stringValue.substring(stringValue.indexOf("[") + 1, stringValue.indexOf("]")));
-        var translations = interpretTranslations(stringValue.substring(stringValue.indexOf("]") + 1).strip());
+        var experiences = interpretExperiences(stringValue.substring(stringValue.indexOf("(") + 1, stringValue.indexOf(")")));
+        var translations = interpretTranslations(stringValue.substring(stringValue.indexOf(")") + 2).strip());
         return new RadioBroadcaster(name, experiences, translations);
     }
 
