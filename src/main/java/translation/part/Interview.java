@@ -5,4 +5,9 @@ public record Interview(String interviewee, double minuteDuration) implements Co
     public double getPrice() {
         return 30 * minuteDuration;
     }
+
+    @Override
+    public String toString() {
+        return "I " + interviewee + " " + minuteDuration;
+    }
 }

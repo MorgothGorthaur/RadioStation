@@ -43,6 +43,10 @@ public class TranslationImpl implements Translation {
         return hash;
     }
 
+    @Override
+    public String toString() {
+        return "T " + price + " " + minuteDuration + " " + parts;
+    }
     public static class Builder {
         private final double minuteDuration;
         private double freeTime;

@@ -12,4 +12,9 @@ public record RadioBroadcaster(String name, LinkedHashSet<WorkOnRadioExperience>
     public RadioBroadcaster(String name) {
         this(name, new LinkedHashSet<>(), new LinkedHashSet<>());
     }
+
+    @Override
+    public String toString() {
+        return "R " + name + " " + experiences + " " + translations;
+    }
 }

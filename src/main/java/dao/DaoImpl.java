@@ -3,7 +3,6 @@ package dao;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.*;
@@ -14,7 +13,7 @@ public class DaoImpl implements RadioStationDao {
     @SneakyThrows
     public void write(Deque<Broadcaster> broadcasters){
         try(var writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            writer.append(broadcasters.toString());
+            for (var broadcaster : broadcasters) writer.append(broadcaster.toString()).append("\n");
         }
     }
 
@@ -22,5 +21,4 @@ public class DaoImpl implements RadioStationDao {
     public List<Broadcaster> read() {
      return null;
     }
-
 }
