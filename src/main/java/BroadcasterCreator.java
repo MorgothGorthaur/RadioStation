@@ -10,31 +10,24 @@ import personality.WorkOnRadioExperience;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.LinkedHashSet;
-import java.util.Map;
+
 @RequiredArgsConstructor
 @Getter
-public class LazyBroadcasterCreator {
-    private final Map<String, Broadcaster> broadcasters;
+public class BroadcasterCreator {
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+
     @SneakyThrows
-    public Broadcaster getBroadcaster() {
-        System.out.print("print broadcaster name:");
-        var name = reader.readLine();
-        var broadcaster = broadcasters.get(name);
-        if (broadcaster == null) {
-            System.out.println("broadcaster not founded!");
-            broadcaster = createBroadcaster(name);
-            broadcasters.put(broadcaster.getName(), broadcaster);
-        }
-        return broadcaster;
+    public Broadcaster createBroadcaster() {
+        System.out.print("print new broadcaster name: ");
+        return createBroadcaster(reader.readLine());
     }
 
     @SneakyThrows
     private Broadcaster createBroadcaster(String name) {
         System.out.print("does he works in this station? [y/n]");
         return switch (reader.readLine()) {
-            case "y" ->  new RadioBroadcaster(name, createExperienceSet());
+            case "y" -> new RadioBroadcaster(name, createExperienceSet());
             case "n" -> createGuestBroadcaster(name);
             default -> createBroadcaster(name);
         };
@@ -55,7 +48,8 @@ public class LazyBroadcasterCreator {
             line = reader.readLine();
             switch (line) {
                 case "y" -> set.add(createWorkOnRadioExperience());
-                case "n" -> {}
+                case "n" -> {
+                }
                 default -> set.addAll(createExperienceSet());
             }
         }
@@ -76,7 +70,7 @@ public class LazyBroadcasterCreator {
     }
 
     @SneakyThrows
-    private double getTimeDuration(){
+    private double getTimeDuration() {
         try {
             System.out.print("print time duration (in years)");
             return Double.parseDouble(reader.readLine());

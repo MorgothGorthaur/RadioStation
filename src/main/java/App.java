@@ -4,6 +4,8 @@ import dao.lexer.ConverterImpl;
 import dao.lexer.LexerImpl;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
+import personality.GuestBroadcaster;
+import personality.RadioBroadcaster;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 public class App {
     private final RadioStationDao dao = new DaoImpl("save", new LexerImpl(), new ConverterImpl());
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private final BroadcasterCreator broadcasterCreator = new BroadcasterCreator();
+    private final TranslationCreator translationCreator = new TranslationCreator();
 
     public static void main(String[] args) {
         new App().run();
@@ -20,41 +24,90 @@ public class App {
 
     @SneakyThrows
     private void run() {
-        var broadcasterCreator = new LazyBroadcasterCreator(
-                new HashMap<>(dao.read().stream().collect(Collectors.toMap(Broadcaster::getName, broadcaster -> broadcaster))));
-        var translationCreator = new TranslationCreator();
-        printMainMenu();
+        var broadcasters = new HashMap<>(dao.read().stream().collect(Collectors.toMap(Broadcaster::getName, broadcaster -> broadcaster)));
+        System.out.println(getMainMenu());
         var line = "";
-        while (!(line = reader.readLine()).equals("exit")) mainMenuHandler(broadcasterCreator, translationCreator, line);
-        dao.write(broadcasterCreator.getBroadcasters().values());
+        while (!(line = reader.readLine()).equals("exit"))
+            mainMenuHandler(line, broadcasters);
+        dao.write(broadcasters.values());
     }
 
     @SneakyThrows
-    private void mainMenuHandler(LazyBroadcasterCreator broadcasterCreator, TranslationCreator translationCreator, String line) {
+    private Optional<Broadcaster> getBroadcasterByName(HashMap<String, Broadcaster> broadcasters) {
+        System.out.print("print broadcaster name: ");
+        return Optional.ofNullable(broadcasters.get(reader.readLine()));
+    }
+
+    private void mainMenuHandler(String line, HashMap<String, Broadcaster> broadcasters) {
         switch (line) {
-            case "add translation" -> {
-                var broadcaster = broadcasterCreator.getBroadcaster();
-                System.out.println("your broadcaster: " + broadcaster);
-                var translation = translationCreator.createTranslation();
-                System.out.println("your translation: ");
-                System.out.println(translation);
-                broadcaster.getTranslations().add(translation);
-                printMainMenu();
+            case "add translation" -> addTranslationHandler(broadcasters);
+            case "get broadcasters" -> System.out.println(broadcasters.keySet());
+            case "add broadcaster" -> addBroadcasterHandler(broadcasters);
+            case "get broadcaster menu" -> {
+                var foundBroadcaster = getBroadcasterByName(broadcasters);
+                if (foundBroadcaster.isPresent()) broadcasterMenuHandler(foundBroadcaster.get());
+                else System.out.println("broadcaster not found!");
             }
-            case "get broadcasters" -> System.out.println(broadcasterCreator.getBroadcasters().keySet());
-            case "get broadcaster" -> System.out.println("your broadcaster: " + broadcasterCreator.getBroadcaster());
             case "exit" -> System.out.println("exit");
-            default -> printMainMenu();
+            default -> System.out.println(getMainMenu());
         }
     }
-    public void printMainMenu() {
-        System.out.println("""
+
+
+    @SneakyThrows
+    private void broadcasterMenuHandler(Broadcaster broadcaster) {
+        var line = "";
+        System.out.println(getBroadcasterMenu());
+        while (!(line = reader.readLine()).equals("exit")) {
+            System.out.println(switch (line) {
+                case "translations" -> broadcaster.getTranslations();
+                case "experience" -> broadcaster instanceof RadioBroadcaster radioBroadcaster
+                        ? radioBroadcaster.getExperiences() : "this is guest broadcaster!";
+                case "resume" -> broadcaster instanceof GuestBroadcaster guestBroadcaster
+                        ? guestBroadcaster.getResume() : "this broadcaster works on radio!";
+                case "exit" -> "exit";
+                default -> getBroadcasterMenu();
+            });
+        }
+        System.out.println(getMainMenu());
+    }
+
+    private String addBroadcasterHandler(HashMap<String, Broadcaster> broadcasters) {
+        var broadcaster = broadcasterCreator.createBroadcaster();
+        broadcasters.put(broadcaster.getName(), broadcaster);
+        return "new broadcaster " + broadcaster;
+    }
+
+    @SneakyThrows
+    private void addTranslationHandler(HashMap<String, Broadcaster> broadcasters) {
+        var foundBroadcaster = getBroadcasterByName(broadcasters);
+        if (foundBroadcaster.isPresent()) {
+            var broadcaster = foundBroadcaster.get();
+            var translation = translationCreator.createTranslation();
+            broadcaster.getTranslations().add(translation);
+            System.out.println("your translation: " + translation);
+        } else System.out.println("broadcaster not found!");
+    }
+
+
+    public String getMainMenu() {
+        return """
                                    menu
                 add translation - for adding new translation
-                get broadcaster - for getting/adding broadcaster
+                add broadcaster - for adding broadcaster
                 get broadcasters - for getting broadcasters names
+                get broadcaster menu - for getting to broadcaster menu
                 menu - reprints menu
                 exit - ends program
-                """);
+                """;
+    }
+
+    private String getBroadcasterMenu() {
+        return """
+                translations -  for getting all broadcaster transactions;
+                experience - for getting all broadcaster experience (but if he is a guest it prints that)
+                resume - for getting broadcaster resume (but if he works on radio, it prints that)
+                exit - exit
+                """;
     }
 }

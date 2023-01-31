@@ -14,7 +14,7 @@ public class TranslationCreator {
     @SneakyThrows
     public Translation createTranslation() {
         try {
-            printTranslationMenu();
+            System.out.println(getTranslationMenu());
             var builder = new TranslationImpl.Builder(getTimeDuration());
             var line = "";
             while (!(line = reader.readLine()).equals("build")) translationMenuHandler(builder, line);
@@ -36,7 +36,7 @@ public class TranslationCreator {
                 case "get free time" -> System.out.println(builder.getFreeTime());
                 case "get price" -> System.out.println(builder.getPrice());
                 case "get commercial parts time" -> System.out.println(builder.getCommercialTime());
-                default -> printTranslationMenu();
+                default -> System.out.println(getTranslationMenu());
             }
         } catch (TooBigCommercialTimeException | AllTranslationTimeIsUsedException ex) {
             System.err.println(ex.getMessage());
@@ -96,8 +96,8 @@ public class TranslationCreator {
 
     }
 
-    private void printTranslationMenu() {
-        System.out.println("""                        
+    private String getTranslationMenu() {
+        return """                        
                         Translation creation menu:
                 music - for create music
                 interview - for create interview
@@ -107,6 +107,6 @@ public class TranslationCreator {
                 get commercial parts time - for getting time of commercial parts
                 menu - reprints menu
                 build - ends creation
-                """);
+                """;
     }
 }
