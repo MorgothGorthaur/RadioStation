@@ -14,10 +14,4 @@ public record GuestBroadcaster(@NonNull String name,@NonNull String resume,
     public GuestBroadcaster(String name, String resume) {
         this(name, resume, new LinkedHashSet<>());
     }
-    @Override
-    public String toString(){
-        var str = new StringBuilder("G, " + name + ", (" + resume + "), ");
-        for (var translation : translations) str.append(translation).append("|");
-        return str.toString();
-    }
 }

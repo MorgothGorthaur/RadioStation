@@ -8,8 +8,4 @@ public record WorkOnRadioExperience(@NonNull String stationName, double yearExpe
     public WorkOnRadioExperience{
         if(stationName.equals("") || yearExperience <= 0) throw new WorkOnRadioExperienceCreationException();
     }
-    @Override
-    public String toString() {
-        return "E, " + stationName + ", " + yearExperience;
-    }
 }

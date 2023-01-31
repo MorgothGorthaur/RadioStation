@@ -13,8 +13,4 @@ public record Advertisement(@NonNull String productName, double minuteDuration) 
         if(productName.equals("") || minuteDuration <= 0) throw new AdvertisementCreationException();
     }
 
-    @Override
-    public String toString() {
-        return "A, " + productName + ", " + minuteDuration;
-    }
 }

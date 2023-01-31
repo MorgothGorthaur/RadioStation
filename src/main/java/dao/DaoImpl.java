@@ -1,5 +1,6 @@
 package dao;
 
+import dao.lexer.Converter;
 import dao.lexer.Lexer;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -15,12 +16,14 @@ import java.util.*;
 public class DaoImpl implements RadioStationDao {
     private final String FILE_NAME;
     private final Lexer lexer;
+    private final Converter converter;
 
     @Override
     @SneakyThrows
     public void write(Collection<Broadcaster> broadcasters) {
+        var res = converter.convert(broadcasters);
         try (var writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            for (var broadcaster : broadcasters) writer.append(broadcaster.toString()).append("\n");
+            writer.append(res);
         }
     }
 

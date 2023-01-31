@@ -13,8 +13,4 @@ public record Interview(@NonNull String interviewee, double minuteDuration) impl
         return 30 * minuteDuration;
     }
 
-    @Override
-    public String toString() {
-        return "I, " + interviewee + ", " + minuteDuration;
-    }
 }
