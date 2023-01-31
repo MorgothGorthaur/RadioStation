@@ -46,10 +46,7 @@ class LexerTest {
 
     @Test
     void testInterpret_shouldReturnGuestBroadcaster() {
-        var inputString = "G, Victor Tarasov, some resume, T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|";
-        assertThat(lexer.interpret(inputString).toString()).isEqualTo(inputString);
-
-        inputString = "G, Victor Tarasov, T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|";
+        var inputString = "G, Victor Tarasov, (some resume, @ gg.), T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|";
         assertThat(lexer.interpret(inputString).toString()).isEqualTo(inputString);
     }
 }
