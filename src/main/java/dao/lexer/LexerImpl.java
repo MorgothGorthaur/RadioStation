@@ -25,8 +25,7 @@ public class LexerImpl implements Lexer {
 
     private GuestBroadcaster interpretGuestBroadcaster(String stringValue) {
         var name = stringValue.substring(0, stringValue.indexOf(", "));
-        stringValue = stringValue.substring(stringValue.indexOf("(") +1);
-        var resume = stringValue.substring(0, stringValue.indexOf(")")).strip();
+        var resume = stringValue.substring(stringValue.indexOf("(") + 1, stringValue.indexOf(")")).strip();
         var translations = interpretTranslations(stringValue.substring(stringValue.indexOf(")") +2).strip());
         return new GuestBroadcaster(name, resume, translations);
     }
