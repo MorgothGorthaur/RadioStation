@@ -2,45 +2,24 @@ package translation;
 
 import exception.AllTranslationTimeIsUsedException;
 import exception.TooBigCommercialTimeException;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 import translation.part.CommercialPart;
 import translation.part.Part;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Objects;
 
-@ToString
-@Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class TranslationImpl implements Translation {
-    private double price;
 
-    private double minuteDuration;
-    private final Deque<Part> parts = new ArrayDeque<>();
+public record TranslationImpl(double price, double minuteDuration, Deque<Part> parts) implements Translation {
     @Override
-    public Deque<Part> getParts() {
+    public Deque<Part> parts() {
         return new ArrayDeque<>(parts);
     }
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) return false;
-        if (o == this) return true;
-        if(!(o instanceof TranslationImpl translation)) return false;
-        return price == translation.price && minuteDuration == translation.minuteDuration
-                && parts.equals(translation.parts);
-    }
 
     @Override
-    public int hashCode() {
-        var hash = 7;
-        hash += 31 * hash + Objects.hashCode(price);
-        hash += 31 * hash + Objects.hashCode(minuteDuration);
-        hash += 31 * hash + parts.hashCode();
-        return hash;
+    public String toString() {
+        var str = new StringBuilder("T " + price + " " + minuteDuration + " [");
+        for (var part : parts) str.append(part).append("=>");
+        return str.append("]").toString();
     }
 
     public static class Builder {
@@ -49,6 +28,7 @@ public class TranslationImpl implements Translation {
         private double commercialTime = 0;
         private double price = 0;
         private final Deque<Part> parts = new ArrayDeque<>();
+
         public Builder(double minuteDuration) {
             this.minuteDuration = minuteDuration;
             this.freeTime = minuteDuration;
@@ -56,7 +36,7 @@ public class TranslationImpl implements Translation {
 
         public Builder addPart(Part part) {
             freeTime -= part.minuteDuration();
-            if(part instanceof CommercialPart commercialPart) {
+            if (part instanceof CommercialPart commercialPart) {
                 price += commercialPart.getPrice();
                 commercialTime += commercialPart.minuteDuration();
             }
@@ -69,17 +49,15 @@ public class TranslationImpl implements Translation {
             for (var part : parts) addPart(part);
             return this;
         }
+
         public Translation build() {
-            var translation = new TranslationImpl();
-            translation.minuteDuration = minuteDuration;
-            translation.parts.addAll(parts);
-            translation.price = price;
-            return translation;
+            return new TranslationImpl(price, minuteDuration, parts);
         }
 
         private void checkConditions() {
-            if(freeTime < 0) throw new AllTranslationTimeIsUsedException();
-            if(commercialTime > minuteDuration /2) throw new TooBigCommercialTimeException(commercialTime, minuteDuration);
+            if (freeTime < 0) throw new AllTranslationTimeIsUsedException();
+            if (commercialTime > minuteDuration / 2)
+                throw new TooBigCommercialTimeException(commercialTime, minuteDuration);
         }
     }
 }
