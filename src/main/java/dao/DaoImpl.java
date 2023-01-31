@@ -26,9 +26,9 @@ public class DaoImpl implements RadioStationDao {
 
     @Override
     @SneakyThrows
-    public List<Broadcaster> read() {
+    public Iterable<Broadcaster> read() {
         try (var reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            var broadcasters = new LinkedList<Broadcaster>();
+            var broadcasters = new ArrayDeque<Broadcaster>();
             var line = "";
             while ((line = reader.readLine()) != null) broadcasters.add(lexer.interpret(line));
             return broadcasters;
