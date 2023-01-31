@@ -4,6 +4,8 @@ import dao.lexer.LexerImpl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class App {
     private final RadioStationDao dao = new DaoImpl("save", new LexerImpl());
@@ -13,5 +15,7 @@ public class App {
     }
 
     private void run() {
+        var broadcasters = new ArrayList<>(dao.read());
+        
     }
 }

@@ -18,7 +18,7 @@ public class DaoImpl implements RadioStationDao {
 
     @Override
     @SneakyThrows
-    public void write(Iterable<Broadcaster> broadcasters) {
+    public void write(Collection<Broadcaster> broadcasters) {
         try (var writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (var broadcaster : broadcasters) writer.append(broadcaster.toString()).append("\n");
         }
@@ -26,7 +26,7 @@ public class DaoImpl implements RadioStationDao {
 
     @Override
     @SneakyThrows
-    public Iterable<Broadcaster> read() {
+    public Collection<Broadcaster> read() {
         try (var reader = new BufferedReader(new FileReader(FILE_NAME))) {
             var broadcasters = new ArrayDeque<Broadcaster>();
             var line = "";
