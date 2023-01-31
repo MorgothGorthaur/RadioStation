@@ -19,7 +19,8 @@ class RadioStationDaoTest {
     RadioStationDao dao = new DaoImpl("save", new LexerImpl());
     @Test
     void write() {
-        var br = new RadioBroadcaster("F", new LinkedHashSet<>(List.of(new WorkOnRadioExperience("f", 5))));
+        var br = new RadioBroadcaster("F");
+        br.experiences().addAll( new LinkedHashSet<>(List.of(new WorkOnRadioExperience("f", 5))));
         var translation = new TranslationImpl.Builder(5).addPart(new Music("g", "G", 3)).addPart(new Music("6","6", 2)).build();
         var translation_2 = new TranslationImpl.Builder(5).addPart(new Music("g", "d", 3)).addPart(new Music("6","6", 2)).build();
         br.translations().addAll(List.of(translation, translation_2));
