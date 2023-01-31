@@ -14,4 +14,7 @@ public record RadioBroadcaster(@NonNull String name,@NonNull LinkedHashSet<WorkO
     public RadioBroadcaster {
         if(name.equals("")) throw new RadioBroadcasterCreationException();
     }
+    public LinkedHashSet<WorkOnRadioExperience> experiences() {
+        return new LinkedHashSet<>(experiences);
+    }
 }
