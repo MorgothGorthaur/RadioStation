@@ -3,7 +3,7 @@ package translation.part;
 import exception.AdvertisementCreationException;
 import lombok.NonNull;
 
-public record Advertisement(@NonNull String productName,@NonNull double minuteDuration) implements CommercialPart {
+public record Advertisement(@NonNull String productName, double minuteDuration) implements CommercialPart {
     @Override
     public double getPrice() {
         return 5 * minuteDuration;
