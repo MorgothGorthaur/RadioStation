@@ -1,17 +1,16 @@
 package personality;
 
+import exception.GuestBroadcasterCreationException;
+import lombok.NonNull;
 import translation.Translation;
 
 import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
 
-public record GuestBroadcaster(String name, String resume,
-                               LinkedHashSet<Translation> translations) implements Broadcaster {
-    public GuestBroadcaster(String name, String resume) {
-        this(name, resume, new LinkedHashSet<>());
+public record GuestBroadcaster(@NonNull String name,@NonNull String resume,
+                               @NonNull LinkedHashSet<Translation> translations) implements Broadcaster {
+    public GuestBroadcaster {
+        if(name.equals("") || resume.equals("")) throw new GuestBroadcasterCreationException();
     }
-
     @Override
     public String toString(){
         var str = new StringBuilder("G, " + name + ", (" + resume + "), ");
