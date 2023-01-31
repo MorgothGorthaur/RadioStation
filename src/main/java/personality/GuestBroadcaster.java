@@ -11,6 +11,9 @@ public record GuestBroadcaster(@NonNull String name,@NonNull String resume,
     public GuestBroadcaster {
         if(name.equals("") || resume.equals("")) throw new GuestBroadcasterCreationException();
     }
+    public GuestBroadcaster(String name, String resume) {
+        this(name, resume, new LinkedHashSet<>());
+    }
     @Override
     public String toString(){
         var str = new StringBuilder("G, " + name + ", (" + resume + "), ");
