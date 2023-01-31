@@ -2,21 +2,10 @@ import dao.DaoImpl;
 import dao.RadioStationDao;
 import dao.lexer.ConverterImpl;
 import dao.lexer.LexerImpl;
-import exception.*;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
-import personality.GuestBroadcaster;
-import personality.RadioBroadcaster;
-import personality.WorkOnRadioExperience;
-import translation.Translation;
-import translation.TranslationImpl;
-import translation.part.Advertisement;
-import translation.part.Interview;
-import translation.part.Music;
-import translation.part.Part;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,7 +21,7 @@ public class App {
     @SneakyThrows
     private void run() {
         var broadcasterCreator = new LazyBroadcasterCreator(
-                new HashMap<>(dao.read().stream().collect(Collectors.toMap(Broadcaster::name, broadcaster -> broadcaster))));
+                new HashMap<>(dao.read().stream().collect(Collectors.toMap(Broadcaster::getName, broadcaster -> broadcaster))));
         var translationCreator = new TranslationCreator();
         printMainMenu();
         var line = "";
@@ -49,7 +38,7 @@ public class App {
                 var translation = translationCreator.createTranslation();
                 System.out.println("your translation: ");
                 System.out.println(translation);
-                broadcaster.translations().add(translation);
+                broadcaster.getTranslations().add(translation);
                 printMainMenu();
             }
             case "get broadcasters" -> System.out.println(broadcasterCreator.getBroadcasters().keySet());
@@ -60,7 +49,7 @@ public class App {
     }
     public void printMainMenu() {
         System.out.println("""
-                menu
+                                   menu
                 add translation - for adding new translation
                 get broadcaster - for getting/adding broadcaster
                 get broadcasters - for getting broadcasters names

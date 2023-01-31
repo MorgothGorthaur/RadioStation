@@ -25,16 +25,16 @@ public class ConverterImpl implements Converter{
     }
 
     private String convertGuestBroadcaster(GuestBroadcaster guestBroadcaster) {
-        var str = new StringBuilder("G, " + guestBroadcaster.name() + ", (" + guestBroadcaster.resume() + "), ");
-        for (var translation : guestBroadcaster.translations()) str.append(convertTranslation(translation)).append("|");
+        var str = new StringBuilder("G, " + guestBroadcaster.getName() + ", (" + guestBroadcaster.getResume() + "), ");
+        for (var translation : guestBroadcaster.getTranslations()) str.append(convertTranslation(translation)).append("|");
         return str.toString();
     }
 
     private String convertRadioBroadcaster(RadioBroadcaster radioBroadcaster) {
-        var str = new StringBuilder("R, " + radioBroadcaster.name() + ", (");
-        for (var exp : radioBroadcaster.experiences()) str.append(convertExperience(exp)).append("=>");
+        var str = new StringBuilder("R, " + radioBroadcaster.getName() + ", (");
+        for (var exp : radioBroadcaster.getExperiences()) str.append(convertExperience(exp)).append("=>");
         str.append("), ");
-        for (var translation : radioBroadcaster.translations()) str.append(convertTranslation(translation)).append("|");
+        for (var translation : radioBroadcaster.getTranslations()) str.append(convertTranslation(translation)).append("|");
         return str.toString();
     }
 

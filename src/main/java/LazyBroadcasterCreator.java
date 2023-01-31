@@ -25,7 +25,7 @@ public class LazyBroadcasterCreator {
         if (broadcaster == null) {
             System.out.println("broadcaster not founded!");
             broadcaster = createBroadcaster(name);
-            broadcasters.put(broadcaster.name(), broadcaster);
+            broadcasters.put(broadcaster.getName(), broadcaster);
         }
         return broadcaster;
     }
