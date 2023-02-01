@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 
 @AllArgsConstructor
 public class AdvertisementCreator implements PartCreator {
-    private BufferedReader reader;
+    private final BufferedReader reader;
     @Override
     @SneakyThrows
     public Advertisement create() {

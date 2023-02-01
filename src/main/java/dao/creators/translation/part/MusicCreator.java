@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 
 @AllArgsConstructor
 public class MusicCreator implements PartCreator {
-    BufferedReader reader;
+    private final BufferedReader reader;
     @SneakyThrows
     @Override
     public Music create() {
