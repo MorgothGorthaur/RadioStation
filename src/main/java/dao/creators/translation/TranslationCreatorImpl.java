@@ -4,6 +4,8 @@ import dao.creators.translation.part.AdvertisementCreator;
 import dao.creators.translation.part.InterviewCreator;
 import dao.creators.translation.part.MusicCreator;
 import dao.creators.translation.part.PartCreatorFactory;
+import exception.AllTranslationTimeIsUsedException;
+import exception.TooBigCommercialTimeException;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import translation.Translation;
@@ -23,11 +25,16 @@ public class TranslationCreatorImpl implements TranslationCreator{
     @Override
     @SneakyThrows
     public Translation create() {
-        System.out.println("print translation time (in minutes) ");
-        var builder = new TranslationImpl.Builder(Double.parseDouble(reader.readLine()));
-        var line = "";
-        while (!(line = reader.readLine()).equals("build")) translationMenuHandler(factory, builder, line);
-        return builder.build();
+        try {
+            System.out.println("print translation time (in minutes) ");
+            var builder = new TranslationImpl.Builder(Double.parseDouble(reader.readLine()));
+            var line = "";
+            while (!(line = reader.readLine()).equals("build")) translationMenuHandler(factory, builder, line);
+            return builder.build();
+        } catch (TooBigCommercialTimeException | AllTranslationTimeIsUsedException | NumberFormatException ex) {
+            System.err.println(ex.getMessage());
+            return create();
+        }
     }
 
     private void translationMenuHandler(PartCreatorFactory factory, TranslationImpl.Builder builder, String line) {
