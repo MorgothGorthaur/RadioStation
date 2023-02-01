@@ -1,4 +1,4 @@
-package dao.creators.experience;
+package dao.creators.broadcaster.experience;
 
 import exception.WorkOnRadioExperienceCreationException;
 import lombok.AllArgsConstructor;
