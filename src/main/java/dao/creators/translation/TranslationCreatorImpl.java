@@ -11,15 +11,19 @@ import translation.TranslationImpl;
 
 import java.io.BufferedReader;
 
-@AllArgsConstructor
+
 public class TranslationCreatorImpl implements TranslationCreator{
-    private BufferedReader reader;
+    private final PartCreatorFactory factory;
+    private final BufferedReader reader;
+    public TranslationCreatorImpl(BufferedReader reader){
+        factory = new PartCreatorFactory(reader);
+        this.reader = reader;
+    }
 
     @Override
     @SneakyThrows
     public Translation create() {
         System.out.println("print translation time (in minutes) ");
-        var factory = new PartCreatorFactory(new AdvertisementCreator(reader), new InterviewCreator(reader), new MusicCreator(reader));
         var builder = new TranslationImpl.Builder(Double.parseDouble(reader.readLine()));
         var line = "";
         while (!(line = reader.readLine()).equals("build")) translationMenuHandler(factory, builder, line);
