@@ -1,13 +1,20 @@
 package dao.creators.translation.part;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import translation.part.Part;
 
-@AllArgsConstructor
+import java.io.BufferedReader;
+
 public class PartCreatorFactory {
-    private AdvertisementCreator advertisementCreator;
-    private InterviewCreator interviewCreator;
-    private MusicCreator musicCreator;
+    private final AdvertisementCreator advertisementCreator;
+    private final InterviewCreator interviewCreator;
+    private final MusicCreator musicCreator;
+    public PartCreatorFactory(BufferedReader reader) {
+        advertisementCreator = new AdvertisementCreator(reader);
+        interviewCreator = new InterviewCreator(reader);
+        musicCreator = new MusicCreator(reader);
+    }
     public Part createPart(PartType type) {
         return switch (type) {
             case ADVERTISEMENT ->  advertisementCreator.create();
