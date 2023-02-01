@@ -29,8 +29,7 @@ public class App {
         var broadcasters = new HashMap<>(dao.read().stream().collect(Collectors.toMap(Broadcaster::getName, broadcaster -> broadcaster)));
         System.out.println(getMainMenu());
         var line = "";
-        while (!(line = reader.readLine()).equals("exit"))
-            mainMenuHandler(line, broadcasters);
+        while (!(line = reader.readLine()).equals("exit")) mainMenuHandler(line, broadcasters);
         dao.write(broadcasters.values());
     }
 
