@@ -4,7 +4,7 @@ import lombok.SneakyThrows;
 import personality.Broadcaster;
 import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
-import personality.WorkOnRadioExperience;
+import personality.WorkOnRadioExperienceImpl;
 import translation.Translation;
 import translation.TranslationImpl;
 import translation.part.Advertisement;
@@ -12,10 +12,6 @@ import translation.part.Interview;
 import translation.part.Music;
 import translation.part.Part;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class LexerSecondImpl implements Lexer {
@@ -58,7 +54,7 @@ public class LexerSecondImpl implements Lexer {
     private RadioBroadcaster interpretRadioBroadcaster(StringBuilder input) {
         var flag = new StringBuilder();
         var name = " ";
-        LinkedHashSet<WorkOnRadioExperience> experiences = null;
+        LinkedHashSet<WorkOnRadioExperienceImpl> experiences = null;
         while (input.length() != 0) {
             flag.append(input.charAt(0));
             input.delete(0, 1);
@@ -207,8 +203,8 @@ public class LexerSecondImpl implements Lexer {
     }
 
 
-    private LinkedHashSet<WorkOnRadioExperience> interpretExperiences(StringBuilder input) {
-        var exp = new LinkedHashSet<WorkOnRadioExperience>();
+    private LinkedHashSet<WorkOnRadioExperienceImpl> interpretExperiences(StringBuilder input) {
+        var exp = new LinkedHashSet<WorkOnRadioExperienceImpl>();
         while (input.length() != 0 && input.charAt(0) != ']') {
             if (input.charAt(0) == ',' || input.charAt(0) == ' ') input.delete(0, 1);
             else exp.add(interpretExperience(input));
@@ -216,7 +212,7 @@ public class LexerSecondImpl implements Lexer {
         return exp;
     }
 
-    private WorkOnRadioExperience interpretExperience(StringBuilder input) {
+    private WorkOnRadioExperienceImpl interpretExperience(StringBuilder input) {
         var flag = new StringBuilder();
         var name = "";
         var years = 0d;
@@ -229,7 +225,7 @@ public class LexerSecondImpl implements Lexer {
             }
             if (flag.toString().equals(" yearExperience=") && !name.equals("")) {
                 years = Double.parseDouble(interpretName(input));
-                return new WorkOnRadioExperience(name, years);
+                return new WorkOnRadioExperienceImpl(name, years);
             }
         }
         throw new RuntimeException();

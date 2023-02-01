@@ -3,7 +3,7 @@ import exception.*;
 import personality.Broadcaster;
 import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
-import personality.WorkOnRadioExperience;
+import personality.WorkOnRadioExperienceImpl;
 import translation.Translation;
 import translation.TranslationImpl;
 import translation.part.Advertisement;
@@ -84,14 +84,14 @@ public class LexerImpl implements Lexer {
         return new Music(elems[1], elems[2], convertToDouble(elems[3]));
     }
 
-    private LinkedHashSet<WorkOnRadioExperience> interpretExperiences(String substring) {
-        var experiencesSet = new LinkedHashSet<WorkOnRadioExperience>();
+    private LinkedHashSet<WorkOnRadioExperienceImpl> interpretExperiences(String substring) {
+        var experiencesSet = new LinkedHashSet<WorkOnRadioExperienceImpl>();
         if(substring.equals("")) return experiencesSet;
         var expArr = substring.split("=>");
         for (var experience : expArr) {
             var elem = experience.split(", ");
             if(elem.length != 3 && !elem[0].equals("E")) throw new CantReadExperienceException(experience);
-            experiencesSet.add(new WorkOnRadioExperience(elem[1].strip(), convertToDouble(elem[2].strip())));
+            experiencesSet.add(new WorkOnRadioExperienceImpl(elem[1].strip(), convertToDouble(elem[2].strip())));
         }
         return experiencesSet;
     }

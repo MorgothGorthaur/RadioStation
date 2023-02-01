@@ -5,7 +5,7 @@ import exception.UnknownPartTypeException;
 import personality.Broadcaster;
 import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
-import personality.WorkOnRadioExperience;
+import personality.WorkOnRadioExperienceImpl;
 import translation.Translation;
 import translation.part.Advertisement;
 import translation.part.Interview;
@@ -51,7 +51,7 @@ public class ConverterImpl implements Converter{
         else throw new UnknownPartTypeException(part.toString());
     }
 
-    private String convertExperience(WorkOnRadioExperience exp) {
+    private String convertExperience(WorkOnRadioExperienceImpl exp) {
         return "E, " + exp.stationName() + ", " + exp.yearExperience();
     }
 }

@@ -1,7 +1,7 @@
 package dao.creators.experience;
 
-import personality.WorkOnRadioExperience;
+import personality.WorkOnRadioExperienceImpl;
 
 public interface ExperienceCreator {
-    WorkOnRadioExperience create();
+    WorkOnRadioExperienceImpl create();
 }

@@ -7,7 +7,7 @@ import lombok.SneakyThrows;
 import personality.Broadcaster;
 import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
-import personality.WorkOnRadioExperience;
+import personality.WorkOnRadioExperienceImpl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -47,8 +47,8 @@ public class BroadcasterCreator {
     }
 
     @SneakyThrows
-    private LinkedHashSet<WorkOnRadioExperience> createExperienceSet() {
-        var set = new LinkedHashSet<WorkOnRadioExperience>();
+    private LinkedHashSet<WorkOnRadioExperienceImpl> createExperienceSet() {
+        var set = new LinkedHashSet<WorkOnRadioExperienceImpl>();
         var line = "";
         while (!line.equals("n")) {
             System.out.print("do you want to add some experience? [y/n]");
@@ -64,12 +64,12 @@ public class BroadcasterCreator {
     }
 
     @SneakyThrows
-    private WorkOnRadioExperience createWorkOnRadioExperience() {
+    private WorkOnRadioExperienceImpl createWorkOnRadioExperience() {
         try {
             System.out.print("print station name:");
             var name = reader.readLine();
             var duration = getTimeDuration();
-            return new WorkOnRadioExperience(name, duration);
+            return new WorkOnRadioExperienceImpl(name, duration);
         } catch (WorkOnRadioExperienceCreationException ex) {
             System.err.println(ex.getMessage());
             return createWorkOnRadioExperience();

@@ -2,17 +2,11 @@ package dao.lexer;
 
 import exception.*;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
-import personality.WorkOnRadioExperience;
-import translation.Translation;
+import personality.WorkOnRadioExperienceImpl;
 import translation.TranslationImpl;
 import translation.part.Advertisement;
-import translation.part.Interview;
 import translation.part.Music;
-import translation.part.Part;
 
 import java.util.ArrayDeque;
 import java.util.LinkedHashSet;
@@ -20,7 +14,6 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LexerTest {
 
@@ -29,8 +22,8 @@ class LexerTest {
     void testInterpret_shouldReturnRadioBroadcaster() {
         var inputString = "R, Victor Tarasov, (E, some radio, 5.0=>E, another radio, 6.0=>), T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|";
         var result = new RadioBroadcaster("Victor Tarasov",
-                new LinkedHashSet<>(List.of(new WorkOnRadioExperience("some radio", 5),
-                        new WorkOnRadioExperience("another radio", 6))),
+                new LinkedHashSet<>(List.of(new WorkOnRadioExperienceImpl("some radio", 5),
+                        new WorkOnRadioExperienceImpl("another radio", 6))),
                 new LinkedHashSet<>(List.of(new TranslationImpl(10.0, 15.0, new ArrayDeque<>(
                         List.of(new Music("some singer","some music", 5.0), new Advertisement("some product",5.0),
                                 new Music("another singer", "another music", 5.0)))))));
