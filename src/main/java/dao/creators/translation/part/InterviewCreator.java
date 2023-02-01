@@ -8,7 +8,7 @@ import translation.part.Interview;
 import java.io.BufferedReader;
 
 @AllArgsConstructor
-public class InterviewCreator implements PartCreator {
+class InterviewCreator implements PartCreator {
     private final BufferedReader reader;
 
     @Override

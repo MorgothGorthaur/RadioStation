@@ -8,7 +8,7 @@ import translation.part.Music;
 import java.io.BufferedReader;
 
 @AllArgsConstructor
-public class MusicCreator implements PartCreator {
+class MusicCreator implements PartCreator {
     private final BufferedReader reader;
     @SneakyThrows
     @Override

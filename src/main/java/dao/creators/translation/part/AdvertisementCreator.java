@@ -8,7 +8,7 @@ import translation.part.Advertisement;
 import java.io.BufferedReader;
 
 @AllArgsConstructor
-public class AdvertisementCreator implements PartCreator {
+class AdvertisementCreator implements PartCreator {
     private final BufferedReader reader;
     @Override
     @SneakyThrows
