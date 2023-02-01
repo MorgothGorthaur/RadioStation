@@ -1,3 +1,5 @@
+import exception.GuestBroadcasterCreationException;
+import exception.RadioBroadcasterCreationException;
 import exception.WorkOnRadioExperienceCreationException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +21,13 @@ public class BroadcasterCreator {
 
     @SneakyThrows
     public Broadcaster createBroadcaster() {
-        System.out.print("print new broadcaster name: ");
-        return createBroadcaster(reader.readLine());
+        try {
+            System.out.print("print new broadcaster name: ");
+            return createBroadcaster(reader.readLine());
+        } catch (GuestBroadcasterCreationException | RadioBroadcasterCreationException ex) {
+            System.err.println(ex.getMessage());
+            return createBroadcaster();
+        }
     }
 
     @SneakyThrows

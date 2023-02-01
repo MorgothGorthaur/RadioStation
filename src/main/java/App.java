@@ -2,6 +2,8 @@ import dao.DaoImpl;
 import dao.RadioStationDao;
 import dao.lexer.ConverterImpl;
 import dao.lexer.LexerImpl;
+import exception.GuestBroadcasterCreationException;
+import exception.RadioBroadcasterCreationException;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
 import personality.GuestBroadcaster;
@@ -72,10 +74,17 @@ public class App {
         System.out.println(getMainMenu());
     }
 
-    private String addBroadcasterHandler(HashMap<String, Broadcaster> broadcasters) {
+    @SneakyThrows
+    private void addBroadcasterHandler(HashMap<String, Broadcaster> broadcasters) {
         var broadcaster = broadcasterCreator.createBroadcaster();
+        if (broadcasters.containsKey(broadcaster.getName())) {
+            System.out.println("broadcaster with this name already exists. Do you want to rewrite? print \"y\"");
+            var answer = reader.readLine();
+            System.out.println(answer);
+            if (!answer.equals("y")) System.out.println("canceled!");
+        }
         broadcasters.put(broadcaster.getName(), broadcaster);
-        return "new broadcaster " + broadcaster;
+        System.out.println("new broadcaster " + broadcaster);
     }
 
     @SneakyThrows
