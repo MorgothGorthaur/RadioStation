@@ -1,18 +1,23 @@
 package creators.broadcaster;
 
+import lombok.RequiredArgsConstructor;
 import personality.Broadcaster;
+
+import java.io.BufferedReader;
+
 
 public class BroadcasterCreatorFactory {
     private final GuestBroadcasterCreator guestBroadcasterCreator;
     private final RadioBroadcasterCreator radioBroadcasterCreator;
-    public BroadcasterCreatorFactory() {
-
+    public BroadcasterCreatorFactory(BufferedReader reader) {
+        guestBroadcasterCreator = new GuestBroadcasterCreator(reader);
+        radioBroadcasterCreator = new RadioBroadcasterCreator(reader);
     }
     public Broadcaster createBroadcaster(BroadcasterType type) {
-        switch (type) {
-            case GUEST ->;
+        return switch (type) {
+            case GUEST -> guestBroadcasterCreator.create();
             case RADIO -> ;
-        }
+        };
 
     }
 
