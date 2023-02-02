@@ -17,14 +17,11 @@ public class ExperienceSetCreator {
     @SneakyThrows
     public Set<Experience> create() {
         var experiences = new LinkedHashSet<Experience>();
-        System.out.print("do you want to add experience? [y/n]");
         var line = "";
-        while (!(line = reader.readLine()).equals("n")) {
-            switch (line) {
-                case "y" -> experiences.add(experienceCreator.create());
-                case "n" -> {}
-                default -> System.out.print("do you want to add experience? [y/n]");
-            }
+        while (!line.equals("n")) {
+            System.out.print("do you want to add experience? [y/n]");
+            line = reader.readLine();
+            if ("y".equals(line)) experiences.add(experienceCreator.create());
         }
 
         return experiences;
