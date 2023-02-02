@@ -5,6 +5,7 @@ import personality.Experience;
 
 import java.io.BufferedReader;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class ExperienceSetCreator {
     private final ExperienceCreator experienceCreator;
@@ -14,7 +15,7 @@ public class ExperienceSetCreator {
         experienceCreator = new ExperienceCreatorImpl(reader);
     }
     @SneakyThrows
-    public LinkedHashSet<Experience> create() {
+    public Set<Experience> create() {
         var experiences = new LinkedHashSet<Experience>();
         System.out.print("do you want to add experience? [y/n]");
         var line = "";
