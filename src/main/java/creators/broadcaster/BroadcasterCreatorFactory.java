@@ -16,7 +16,7 @@ public class BroadcasterCreatorFactory {
     public Broadcaster createBroadcaster(BroadcasterType type) {
         return switch (type) {
             case GUEST -> guestBroadcasterCreator.create();
-            case RADIO -> ;
+            case RADIO -> radioBroadcasterCreator.create();
         };
 
     }
