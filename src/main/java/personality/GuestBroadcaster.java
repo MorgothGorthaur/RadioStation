@@ -13,7 +13,7 @@ public class GuestBroadcaster implements Broadcaster{
     private String name;
     private String resume;
     private Set<Translation> translations;
-    public GuestBroadcaster(String name, String resume, LinkedHashSet<Translation> translations) {
+    public GuestBroadcaster(String name, String resume, Set<Translation> translations) {
         if(name.equals("") || resume.equals("")) throw new GuestBroadcasterCreationException();
         this.name = name;
         this.resume = resume;
