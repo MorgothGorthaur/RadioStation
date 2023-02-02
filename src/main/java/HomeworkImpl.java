@@ -7,6 +7,8 @@ import dao.lexer.ConverterImpl;
 import dao.lexer.LexerImpl;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
+import personality.GuestBroadcaster;
+import personality.RadioBroadcaster;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -45,7 +47,7 @@ public class HomeworkImpl implements HomeWork {
     @Override
     public void updateBroadcaster(String name) {
         var broadcaster = broadcasters.remove(name);
-        if (broadcaster != null) {
+        if (broadcaster != null) { 
             var updated = broadcasterCreatorFactory.updateBroadcaster(broadcaster);
             System.out.println("your broadcaster: " + broadcaster );
             addToBroadcasters(updated);
@@ -58,6 +60,60 @@ public class HomeworkImpl implements HomeWork {
         var broadcaster = broadcasters.remove(name);
         System.out.println(broadcaster != null ? "removed broadcaster " + broadcaster : "broadcaster with this name " + name + "not founded!");
     }
+
+    @Override
+    public void printBroadcasters() {
+        System.out.println(broadcasters);
+    }
+
+    @Override
+    public void printBroadcaster(String name) {
+        var broadcaster = broadcasters.get(name);
+        if(broadcaster != null) getBroadcasterTypeHandler(broadcaster);
+        else System.out.println("broadcaster with name " + name + "not founded!");
+    }
+
+    @Override
+    public void save() {
+        dao.write(broadcasters);
+    }
+
+    private void getBroadcasterTypeHandler(Broadcaster broadcaster) {
+        if(broadcaster instanceof GuestBroadcaster guestBroadcaster) getGuestBroadcaster(guestBroadcaster);
+        else if(broadcaster instanceof RadioBroadcaster radioBroadcaster) getRadioBroadcaster(radioBroadcaster);
+    }
+
+    @SneakyThrows
+    private void getRadioBroadcaster(RadioBroadcaster radioBroadcaster) {
+        System.out.println(getRadioBroadcasterMenu());
+        var line = "";
+        while (!(line = reader.readLine()).equals("exit")){
+            System.out.println(switch (line) {
+                case "print name" ->  radioBroadcaster.getName();
+                case "print experiences" -> radioBroadcaster.getExperiences();
+                case "print translations" -> radioBroadcaster.getTranslations();
+                default -> getRadioBroadcasterMenu();
+            });
+        }
+    }
+
+
+
+    @SneakyThrows
+    private void getGuestBroadcaster(GuestBroadcaster guestBroadcaster) {
+        System.out.println(getGuestBroadcasterMenu());
+        var line = "";
+        while (!(line = reader.readLine()).equals("exit")) {
+            System.out.println(switch (line) {
+                case "print name" -> guestBroadcaster.getName();
+                case "print resume" -> guestBroadcaster.getResume();
+                case "print translation" -> guestBroadcaster.getTranslations();
+            });
+        }
+    }
+
+
+
     private void addToBroadcasters(Broadcaster broadcaster) {
         if (broadcasters.containsKey(broadcaster.getName())) {
             System.out.println("broadcaster with this name already exist");
@@ -85,4 +141,24 @@ public class HomeworkImpl implements HomeWork {
             default -> createBroadcasterHandler();
         };
     }
+
+    private String getRadioBroadcasterMenu() {
+        return """
+                         RadioBroadcaster menu
+                print name - for getting name
+                print experiences - for getting experiences
+                print translations - for getting translations
+                exit - returns to main menu
+                """;
+    }
+    private String getGuestBroadcasterMenu(){
+        return """
+                         GuestBroadcaster menu
+                print name - for getting name
+                print resume - for getting resume
+                print translations - for getting translations
+                exit - returns to main menu
+                """;
+    }
+
 }

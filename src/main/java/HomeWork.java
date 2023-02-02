@@ -10,5 +10,11 @@ public interface HomeWork {
 
     void removeBroadcaster(String name);
 
+    void printBroadcasters();
+
+    void printBroadcaster(String name);
+
+    void save();
+
 
 }
