@@ -2,11 +2,15 @@ package dao.lexer;
 
 import exception.*;
 import org.junit.jupiter.api.Test;
+import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
+import personality.experience.Experience;
 import personality.experience.WorkOnRadioExperienceImpl;
+import translation.Translation;
 import translation.TranslationImpl;
 import translation.part.Advertisement;
 import translation.part.Music;
+import translation.part.Part;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -22,36 +26,50 @@ class LexerTest {
     @Test
     void testInterpret_shouldReturnRadioBroadcaster() {
         var inputString = "R, Victor Tarasov, (E, some radio, 5.0=>E, another radio, 6.0=>), T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|";
-        var result = new RadioBroadcaster("Victor Tarasov",
+        var expected = new RadioBroadcaster("Victor Tarasov",
                 new LinkedHashSet<>(List.of(new WorkOnRadioExperienceImpl("some radio", 5),
                         new WorkOnRadioExperienceImpl("another radio", 6))),
                 new LinkedHashSet<>(List.of(new TranslationImpl(10.0, 15.0, new ArrayList<>(
                         List.of(new Music("some singer","some music", 5.0), new Advertisement("some product",5.0),
                                 new Music("another singer", "another music", 5.0)))))));
-        assertThat(lexer.interpret(inputString)).isEqualTo(result);
+        assertThat(lexer.interpret(inputString)).isEqualTo(expected);
     }
     @Test
     void testInterpret_shouldReturnRadioBroadcaster_withEmptyExperience() {
         var inputString = "R, Victor Tarasov, (), T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|";
-        assertThat(lexer.interpret(inputString).toString()).isEqualTo(inputString);
+        var expected = new RadioBroadcaster("Victor Tarasov", new LinkedHashSet<>(), new LinkedHashSet<Translation>(List.of(
+                new TranslationImpl(10.0, 15.0, new ArrayList<>(
+                        List.of(new Music("some singer", "some music", 5.0),
+                                new Advertisement("some product", 5.0),
+                new Music("another singer", "another music", 5.0)))))));
+        assertThat(lexer.interpret(inputString)).isEqualTo(expected);
     }
 
     @Test
     void testInterpret_shouldReturnRadioBroadcaster_withEmptyTranslation() {
         var inputString = "R, Victor Tarasov, (E, some radio, 5.0=>E, another radio, 6.0=>), ";
-        assertThat(lexer.interpret(inputString).toString()).isEqualTo(inputString);
+        var expected = new RadioBroadcaster("Victor Tarasov", new LinkedHashSet<>(
+                List.of(new WorkOnRadioExperienceImpl("some radio", 5.0),
+                        new WorkOnRadioExperienceImpl("another radio", 6.0))));
+        assertThat(lexer.interpret(inputString)).isEqualTo(expected);
     }
 
     @Test
     void testInterpret_shouldReturnRadioBroadcaster_withTranslation_withoutAnyParts() {
         var inputString = "R, Victor Tarasov, (E, some radio, 5.0=>E, another radio, 6.0=>), T 10.0 15.0 []|";
-        assertThat(lexer.interpret(inputString).toString()).isEqualTo(inputString);
+        var expected = new RadioBroadcaster("Victor Tarasov", new LinkedHashSet<>(
+                List.of(new WorkOnRadioExperienceImpl("some radio", 5.0),
+                        new WorkOnRadioExperienceImpl("another radio", 6.0))),
+                new LinkedHashSet<>(List.of(new TranslationImpl(10.0, 15.0, new ArrayList<Part>()))));
+        assertThat(lexer.interpret(inputString)).isEqualTo(expected);
     }
 
     @Test
     void testInterpret_shouldReturnGuestBroadcaster() {
-        var inputString = "G, Victor Tarasov, (some resume, @ gg.), T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|";
-        assertThat(lexer.interpret(inputString).toString()).isEqualTo(inputString);
+        var inputString = "G, Victor Tarasov, (some resume, @ gg.), T 10.0 15.0 [M, some singer, some music, 5.0=>]|";
+        var expected = new GuestBroadcaster("Victor Tarasov", "some resume, @ gg.",
+                new LinkedHashSet<>(List.of(new TranslationImpl(10.0, 15.0, new ArrayList<>(List.of(new Music("some singer", "some music", 5.0)))))));
+        assertThat(lexer.interpret(inputString)).isEqualTo(expected);
     }
 
     @Test
