@@ -1,4 +1,4 @@
-package dao.creators.translation;
+package creators.translation;
 
 import lombok.AllArgsConstructor;
 import translation.Translation;

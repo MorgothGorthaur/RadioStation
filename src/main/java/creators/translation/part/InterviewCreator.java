@@ -1,4 +1,4 @@
-package dao.creators.translation.part;
+package creators.translation.part;
 
 import exception.InterviewCreationException;
 import lombok.AllArgsConstructor;

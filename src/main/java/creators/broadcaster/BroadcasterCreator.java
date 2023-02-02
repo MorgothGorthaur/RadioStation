@@ -1,4 +1,4 @@
-package dao.creators.broadcaster;
+package creators.broadcaster;
 
 import personality.Broadcaster;
 

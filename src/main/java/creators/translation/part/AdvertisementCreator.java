@@ -1,4 +1,4 @@
-package dao.creators.translation.part;
+package creators.translation.part;
 
 import exception.AdvertisementCreationException;
 import lombok.AllArgsConstructor;

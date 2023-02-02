@@ -1,7 +1,5 @@
-package dao.creators.translation.part;
+package creators.translation.part;
 
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import translation.part.Part;
 
 import java.io.BufferedReader;

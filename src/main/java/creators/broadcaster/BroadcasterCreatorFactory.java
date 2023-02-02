@@ -1,7 +1,6 @@
-package dao.creators.broadcaster;
+package creators.broadcaster;
 
 import personality.Broadcaster;
-import personality.RadioBroadcaster;
 
 public class BroadcasterCreatorFactory {
     private final GuestBroadcasterCreator guestBroadcasterCreator;

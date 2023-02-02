@@ -1,4 +1,4 @@
-package dao.creators.broadcaster.experience;
+package creators.broadcaster.experience;
 
 import personality.Experience;
 import personality.WorkOnRadioExperienceImpl;

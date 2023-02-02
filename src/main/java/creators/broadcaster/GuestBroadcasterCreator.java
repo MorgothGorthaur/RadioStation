@@ -1,6 +1,6 @@
-package dao.creators.broadcaster;
+package creators.broadcaster;
 
-import dao.creators.broadcaster.experience.ExperienceCreator;
+import creators.broadcaster.experience.ExperienceCreator;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
