@@ -34,7 +34,7 @@ public class LexerImpl implements Lexer {
         return new RadioBroadcaster(name, experiences, translations);
     }
 
-    private LinkedHashSet<Translation> interpretTranslations(String substring) {
+    private Set<Translation> interpretTranslations(String substring) {
         var translations = new LinkedHashSet<Translation>();
         if(substring.equals("")) return translations;
         var translationsString = substring.split("\\|");
