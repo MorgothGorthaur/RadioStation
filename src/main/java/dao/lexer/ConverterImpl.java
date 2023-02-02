@@ -1,11 +1,9 @@
 package dao.lexer;
 
 import exception.UnknownBroadcasterException;
+import exception.UnknownExperienceTypeException;
 import exception.UnknownPartTypeException;
-import personality.Broadcaster;
-import personality.GuestBroadcaster;
-import personality.RadioBroadcaster;
-import personality.WorkOnRadioExperienceImpl;
+import personality.*;
 import translation.Translation;
 import translation.part.Advertisement;
 import translation.part.Interview;
@@ -51,7 +49,8 @@ public class ConverterImpl implements Converter{
         else throw new UnknownPartTypeException(part.toString());
     }
 
-    private String convertExperience(WorkOnRadioExperienceImpl exp) {
-        return "E, " + exp.stationName() + ", " + exp.yearExperience();
+    private String convertExperience(Experience exp) {
+        if(exp instanceof WorkOnRadioExperienceImpl work) return  "E, " + work.stationName() + ", " + work.yearExperience();
+        throw new UnknownExperienceTypeException(exp.toString());
     }
 }
