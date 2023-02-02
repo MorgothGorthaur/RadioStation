@@ -40,14 +40,16 @@ public class HomeworkImpl implements HomeWork {
     }
 
     @Override
-    public void addTranslation(String name) {
+    public void addTranslation() {
+        var name = setName();
         var broadcaster = broadcasters.get(name);
         if (broadcaster != null) broadcaster.getTranslations().add(translationCreator.create());
         else System.out.println("broadcaster with name " + name + " not founded!");
     }
 
     @Override
-    public void updateBroadcaster(String name) {
+    public void updateBroadcaster() {
+        var name = setName();
         var broadcaster = broadcasters.remove(name);
         if (broadcaster != null) { 
             var updated = broadcasterCreatorFactory.updateBroadcaster(broadcaster);
@@ -58,7 +60,8 @@ public class HomeworkImpl implements HomeWork {
     }
 
     @Override
-    public void removeBroadcaster(String name) {
+    public void removeBroadcaster() {
+        var name = setName();
         var broadcaster = broadcasters.remove(name);
         System.out.println(broadcaster != null ? "removed broadcaster " + broadcaster : "broadcaster with this name " + name + "not founded!");
     }
@@ -69,7 +72,8 @@ public class HomeworkImpl implements HomeWork {
     }
 
     @Override
-    public void printBroadcaster(String name) {
+    public void printBroadcaster() {
+        var name = setName();
         var broadcaster = broadcasters.get(name);
         if(broadcaster != null) getBroadcasterTypeHandler(broadcaster);
         else System.out.println("broadcaster with name " + name + "not founded!");
@@ -164,4 +168,9 @@ public class HomeworkImpl implements HomeWork {
                 """;
     }
 
+    @SneakyThrows
+    private String setName() {
+        System.out.print("print broadcaster name: ");
+        return reader.readLine();
+    }
 }

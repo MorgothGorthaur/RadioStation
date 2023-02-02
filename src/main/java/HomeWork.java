@@ -4,17 +4,15 @@ import personality.Broadcaster;
 public interface HomeWork {
     void addBroadcaster();
 
-    void addTranslation(String name);
+    void addTranslation();
 
-    void updateBroadcaster(String name);
+    void updateBroadcaster();
 
-    void removeBroadcaster(String name);
+    void removeBroadcaster();
 
     void printBroadcasters();
 
-    void printBroadcaster(String name);
+    void printBroadcaster();
 
     void save();
-
-
 }
