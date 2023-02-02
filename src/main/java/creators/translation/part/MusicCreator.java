@@ -22,7 +22,7 @@ class MusicCreator implements PartCreator {
             var duration = Double.parseDouble(reader.readLine());
             return new Music(singerName, musicName, duration);
         } catch (MusicCreationException | NumberFormatException ex) {
-            System.err.println(ex.getMessage());
+            System.out.println("\n" + ex.getMessage());
             return create();
         }
     }

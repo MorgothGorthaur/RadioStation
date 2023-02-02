@@ -20,7 +20,7 @@ class ExperienceCreatorImpl implements ExperienceCreator{
             var duration = Double.parseDouble(reader.readLine());
             return new WorkOnRadioExperienceImpl(stationName, duration);
         } catch (WorkOnRadioExperienceCreationException | NumberFormatException ex) {
-            System.err.println(ex.getMessage());
+            System.out.println("\n" + ex.getMessage());
             return create();
         }
     }

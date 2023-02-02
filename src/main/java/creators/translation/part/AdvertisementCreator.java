@@ -20,7 +20,7 @@ class AdvertisementCreator implements PartCreator {
             var duration = Double.parseDouble(reader.readLine());
             return new Advertisement(productName, duration);
         } catch (AdvertisementCreationException | NumberFormatException ex) {
-            System.err.println(ex.getMessage());
+            System.out.println("\n" + ex.getMessage());
             return create();
         }
     }

@@ -21,7 +21,7 @@ class InterviewCreator implements PartCreator {
             var duration = Double.parseDouble(reader.readLine());
             return new Interview(interviewee, duration);
         } catch (InterviewCreationException | NumberFormatException ex) {
-            System.err.println(ex.getMessage());
+            System.out.println("\n" + ex.getMessage());
             return create();
         }
     }

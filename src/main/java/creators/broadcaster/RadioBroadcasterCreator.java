@@ -26,7 +26,7 @@ class RadioBroadcasterCreator implements BroadcasterCreator {
         try {
             return new RadioBroadcaster(setName(), creator.create());
         } catch (RadioBroadcasterCreationException ex) {
-            System.err.println(ex.getMessage());
+            System.out.println("\n" + ex.getMessage());
             return create();
         }
     }

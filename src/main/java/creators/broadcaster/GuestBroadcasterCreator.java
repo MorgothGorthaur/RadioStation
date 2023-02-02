@@ -17,7 +17,7 @@ class GuestBroadcasterCreator implements BroadcasterCreator{
         try {
             return new GuestBroadcaster(setName(), setResume());
         } catch (GuestBroadcasterCreationException ex) {
-            System.err.println(ex.getMessage());
+            System.out.println("\n" + ex.getMessage());
             return create();
         }
     }
