@@ -1,9 +1,6 @@
 package dao.lexer;
 import exception.*;
-import personality.Broadcaster;
-import personality.GuestBroadcaster;
-import personality.RadioBroadcaster;
-import personality.WorkOnRadioExperienceImpl;
+import personality.*;
 import translation.Translation;
 import translation.TranslationImpl;
 import translation.part.Advertisement;
@@ -84,8 +81,8 @@ public class LexerImpl implements Lexer {
         return new Music(elems[1], elems[2], convertToDouble(elems[3]));
     }
 
-    private LinkedHashSet<WorkOnRadioExperienceImpl> interpretExperiences(String substring) {
-        var experiencesSet = new LinkedHashSet<WorkOnRadioExperienceImpl>();
+    private LinkedHashSet<Experience> interpretExperiences(String substring) {
+        var experiencesSet = new LinkedHashSet<Experience>();
         if(substring.equals("")) return experiencesSet;
         var expArr = substring.split("=>");
         for (var experience : expArr) {
