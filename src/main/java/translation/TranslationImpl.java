@@ -27,7 +27,7 @@ public record TranslationImpl(double price, double minuteDuration, List<Part> pa
         private double commercialTime = 0;
         @Getter
         private double price = 0;
-        private final Deque<Part> parts = new ArrayDeque<>();
+        private final List<Part> parts = new ArrayList<>();
 
         public Builder(double minuteDuration) {
             if (minuteDuration <= 0) throw new TranslationCreationException();
