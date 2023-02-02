@@ -25,7 +25,7 @@ public class TranslationCreatorImpl implements TranslationCreator{
             System.out.print("print translation time (in minutes) ");
             var builder = new TranslationImpl.Builder(Double.parseDouble(reader.readLine()));
             printTranslationMenu();
-            var line = "";
+            var line = ""; 
             while (!(line = reader.readLine()).equals("build")) translationMenuHandler(factory, builder, line);
             return builder.build();
         } catch (TooBigCommercialTimeException | AllTranslationTimeIsUsedException | NumberFormatException ex) {
