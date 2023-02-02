@@ -124,7 +124,7 @@ public class HomeworkImpl implements HomeWork {
     private void addToBroadcasters(Broadcaster broadcaster) {
         if (broadcasters.containsKey(broadcaster.getName())) {
             System.out.println("broadcaster with this name already exist");
-            System.out.println("do you want to rewrite?[y/n]");
+            System.out.print("do you want to rewrite?[y/n]");
             if (yesNoHandler()) broadcasters.put(broadcaster.getName(), broadcaster);
         } else broadcasters.put(broadcaster.getName(), broadcaster);
     }
