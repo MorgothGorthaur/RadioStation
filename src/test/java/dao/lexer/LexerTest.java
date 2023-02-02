@@ -9,6 +9,7 @@ import translation.part.Advertisement;
 import translation.part.Music;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -24,7 +25,7 @@ class LexerTest {
         var result = new RadioBroadcaster("Victor Tarasov",
                 new LinkedHashSet<>(List.of(new WorkOnRadioExperienceImpl("some radio", 5),
                         new WorkOnRadioExperienceImpl("another radio", 6))),
-                new LinkedHashSet<>(List.of(new TranslationImpl(10.0, 15.0, new ArrayDeque<>(
+                new LinkedHashSet<>(List.of(new TranslationImpl(10.0, 15.0, new ArrayList<>(
                         List.of(new Music("some singer","some music", 5.0), new Advertisement("some product",5.0),
                                 new Music("another singer", "another music", 5.0)))))));
         assertThat(lexer.interpret(inputString)).isEqualTo(result);

@@ -53,9 +53,9 @@ public class LexerImpl implements Lexer {
         return new TranslationImpl(price, duration, parts);
     }
 
-    private Deque<Part> interpretParts(String substring) {
+    private List<Part> interpretParts(String substring) {
         var partsArr = substring.split("=>");
-        var parts = new ArrayDeque<Part>();
+        var parts = new ArrayList<Part>();
         if(substring.equals("")) return parts;
         for (var p : partsArr) {
             parts.add(switch (p.charAt(0)) {
