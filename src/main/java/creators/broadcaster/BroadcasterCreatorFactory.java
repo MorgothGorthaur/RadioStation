@@ -1,7 +1,10 @@
 package creators.broadcaster;
 
+import exception.UnknownBroadcasterException;
 import lombok.RequiredArgsConstructor;
 import personality.Broadcaster;
+import personality.GuestBroadcaster;
+import personality.RadioBroadcaster;
 
 import java.io.BufferedReader;
 
@@ -19,6 +22,12 @@ public class BroadcasterCreatorFactory {
             case RADIO -> radioBroadcasterCreator.create();
         };
 
+    }
+
+    public Broadcaster updateBroadcaster(Broadcaster broadcaster) {
+        if(broadcaster instanceof RadioBroadcaster) return radioBroadcasterCreator.update(broadcaster);
+        else if(broadcaster instanceof GuestBroadcaster) return guestBroadcasterCreator.update(broadcaster);
+        else throw new UnknownBroadcasterException(broadcaster.toString());
     }
 
     public enum BroadcasterType {
