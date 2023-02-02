@@ -6,13 +6,14 @@ import translation.Translation;
 
 
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Data
 @NonNull
 public class RadioBroadcaster implements Broadcaster{
     private String name;
-    private LinkedHashSet<Experience> experiences;
-    private LinkedHashSet<Translation> translations;
+    private Set<Experience> experiences;
+    private Set<Translation> translations;
     public RadioBroadcaster(String name, LinkedHashSet<Experience> experiences, LinkedHashSet<Translation> translations) {
         if(name.equals("")) throw new RadioBroadcasterCreationException();
         this.name = name;
