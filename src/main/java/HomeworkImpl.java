@@ -75,7 +75,7 @@ public class HomeworkImpl implements HomeWork {
 
     @Override
     public void save() {
-        dao.write(broadcasters);
+        dao.write(broadcasters.values());
     }
 
     private void getBroadcasterTypeHandler(Broadcaster broadcaster) {
