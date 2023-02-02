@@ -1,5 +1,6 @@
-package dao.lexer;
+package dao.coverter;
 
+import dao.coverter.Converter;
 import exception.UnknownBroadcasterException;
 import exception.UnknownExperienceTypeException;
 import exception.UnknownPartTypeException;
@@ -10,7 +11,7 @@ import translation.part.Interview;
 import translation.part.Music;
 import translation.part.Part;
 
-public class ConverterImpl implements Converter{
+public class ConverterImpl implements Converter {
     @Override
     public String convert(Iterable<Broadcaster> broadcasters) {
         var str = new StringBuilder();
