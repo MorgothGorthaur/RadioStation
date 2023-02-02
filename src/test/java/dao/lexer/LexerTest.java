@@ -3,7 +3,7 @@ package dao.lexer;
 import exception.*;
 import org.junit.jupiter.api.Test;
 import personality.RadioBroadcaster;
-import personality.WorkOnRadioExperienceImpl;
+import personality.experience.WorkOnRadioExperienceImpl;
 import translation.TranslationImpl;
 import translation.part.Advertisement;
 import translation.part.Music;

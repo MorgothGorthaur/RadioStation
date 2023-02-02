@@ -3,7 +3,7 @@ package creators.broadcaster.experience;
 import exception.WorkOnRadioExperienceCreationException;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import personality.WorkOnRadioExperienceImpl;
+import personality.experience.WorkOnRadioExperienceImpl;
 
 import java.io.BufferedReader;
 

@@ -2,6 +2,7 @@ package personality;
 import exception.RadioBroadcasterCreationException;
 import lombok.Data;
 import lombok.NonNull;
+import personality.experience.Experience;
 import translation.Translation;
 
 

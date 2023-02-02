@@ -1,7 +1,7 @@
 package creators.broadcaster.experience;
 
 import lombok.SneakyThrows;
-import personality.Experience;
+import personality.experience.Experience;
 
 import java.io.BufferedReader;
 import java.util.LinkedHashSet;

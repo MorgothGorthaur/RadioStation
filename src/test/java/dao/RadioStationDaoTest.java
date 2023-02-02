@@ -4,7 +4,7 @@ import dao.coverter.ConverterImpl;
 import dao.lexer.LexerImpl;
 import org.junit.jupiter.api.Test;
 import personality.RadioBroadcaster;
-import personality.WorkOnRadioExperienceImpl;
+import personality.experience.WorkOnRadioExperienceImpl;
 import translation.TranslationImpl;
 import translation.part.Music;
 

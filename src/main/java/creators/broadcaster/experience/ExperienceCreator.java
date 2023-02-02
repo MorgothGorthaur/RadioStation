@@ -1,7 +1,6 @@
 package creators.broadcaster.experience;
 
-import personality.Experience;
-import personality.WorkOnRadioExperienceImpl;
+import personality.experience.Experience;
 
 interface ExperienceCreator {
     Experience create();

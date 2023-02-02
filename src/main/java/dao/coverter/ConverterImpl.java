@@ -1,10 +1,11 @@
 package dao.coverter;
 
-import dao.coverter.Converter;
 import exception.UnknownBroadcasterException;
 import exception.UnknownExperienceTypeException;
 import exception.UnknownPartTypeException;
 import personality.*;
+import personality.experience.Experience;
+import personality.experience.WorkOnRadioExperienceImpl;
 import translation.Translation;
 import translation.part.Advertisement;
 import translation.part.Interview;
