@@ -11,15 +11,15 @@ import java.util.LinkedHashSet;
 @NonNull
 public class RadioBroadcaster implements Broadcaster{
     private String name;
-    private LinkedHashSet<WorkOnRadioExperienceImpl> experiences;
+    private LinkedHashSet<Experience> experiences;
     private LinkedHashSet<Translation> translations;
-    public RadioBroadcaster(String name, LinkedHashSet<WorkOnRadioExperienceImpl> experiences, LinkedHashSet<Translation> translations) {
+    public RadioBroadcaster(String name, LinkedHashSet<Experience> experiences, LinkedHashSet<Translation> translations) {
         if(name.equals("")) throw new RadioBroadcasterCreationException();
         this.name = name;
         this.translations = translations;
         this.experiences = experiences;
     }
-    public RadioBroadcaster(String name, LinkedHashSet<WorkOnRadioExperienceImpl> experiences) {
+    public RadioBroadcaster(String name, LinkedHashSet<Experience> experiences) {
         this(name, experiences, new LinkedHashSet<>());
     }
 }
