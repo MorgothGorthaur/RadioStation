@@ -8,13 +8,15 @@ import translation.part.CommercialPart;
 import translation.part.Part;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 
-public record TranslationImpl(double price, double minuteDuration, Deque<Part> parts) implements Translation {
+public record TranslationImpl(double price, double minuteDuration, List<Part> parts) implements Translation {
     @Override
-    public Deque<Part> parts() {
-        return new ArrayDeque<>(parts);
+    public List<Part> parts() {
+        return new ArrayList<>(parts);
     }
 
     public static class Builder {
