@@ -1,8 +1,5 @@
 package creators.translation;
 
-import dao.creators.translation.part.AdvertisementCreator;
-import dao.creators.translation.part.InterviewCreator;
-import dao.creators.translation.part.MusicCreator;
 import creators.translation.part.PartCreatorFactory;
 import exception.AllTranslationTimeIsUsedException;
 import exception.TooBigCommercialTimeException;
