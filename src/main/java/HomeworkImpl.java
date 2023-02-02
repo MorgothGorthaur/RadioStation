@@ -5,11 +5,8 @@ import dao.DaoImpl;
 import dao.RadioStationDao;
 import dao.lexer.ConverterImpl;
 import dao.lexer.LexerImpl;
-import exception.UnknownBroadcasterException;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
-import personality.GuestBroadcaster;
-import personality.RadioBroadcaster;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -35,11 +32,38 @@ public class HomeworkImpl implements HomeWork {
     public void addBroadcaster() {
         var createdBroadcaster = createBroadcasterHandler();
         System.out.println("your broadcaster: " + createdBroadcaster);
-        if (broadcasters.containsKey(createdBroadcaster.getName())) {
+        addToBroadcasters(createdBroadcaster);
+    }
+
+    @Override
+    public void addTranslation(String name) {
+        var broadcaster = broadcasters.get(name);
+        if (broadcaster != null) broadcaster.getTranslations().add(translationCreator.create());
+        else System.out.println("broadcaster with name " + name + " not founded!");
+    }
+
+    @Override
+    public void updateBroadcaster(String name) {
+        var broadcaster = broadcasters.remove(name);
+        if (broadcaster != null) {
+            var updated = broadcasterCreatorFactory.updateBroadcaster(broadcaster);
+            System.out.println("your broadcaster: " + broadcaster );
+            addToBroadcasters(updated);
+        }
+        else System.out.println("broadcaster with this name " + name + "not founded!");
+    }
+
+    @Override
+    public void removeBroadcaster(String name) {
+        var broadcaster = broadcasters.remove(name);
+        System.out.println(broadcaster != null ? "removed broadcaster " + broadcaster : "broadcaster with this name " + name + "not founded!");
+    }
+    private void addToBroadcasters(Broadcaster broadcaster) {
+        if (broadcasters.containsKey(broadcaster.getName())) {
             System.out.println("broadcaster with this name already exist");
             System.out.println("do you want to rewrite?[y/n]");
-            if (yesNoHandler()) broadcasters.put(createdBroadcaster.getName(), createdBroadcaster);
-        } else broadcasters.put(createdBroadcaster.getName(), createdBroadcaster);
+            if (yesNoHandler()) broadcasters.put(broadcaster.getName(), broadcaster);
+        } else broadcasters.put(broadcaster.getName(), broadcaster);
     }
 
     @SneakyThrows
@@ -60,58 +84,5 @@ public class HomeworkImpl implements HomeWork {
             case "radio" -> broadcasterCreatorFactory.createBroadcaster(BroadcasterCreatorFactory.BroadcasterType.RADIO);
             default -> createBroadcasterHandler();
         };
-    }
-
-    @Override
-    public void addTranslation(String name) {
-        var broadcaster = broadcasters.get(name);
-        if (broadcaster != null) broadcaster.getTranslations().add(translationCreator.create());
-        else System.out.println("broadcaster with name " + name + " not founded!");
-    }
-
-    @Override
-    public void updateBroadcaster(String name) {
-        var broadcaster = broadcasters.remove(name);
-        if (broadcaster != null) {
-            var updated = broadcasterUpdateHandler(broadcaster);
-        }
-        else System.out.println("broadcaster with this name " + name + "not founded!");
-    }
-
-    private Broadcaster broadcasterUpdateHandler(Broadcaster broadcaster) {
-        if(broadcaster instanceof GuestBroadcaster guestBroadcaster) return updateGuestBroadcaster(guestBroadcaster);
-        else if(broadcaster instanceof RadioBroadcaster radioBroadcaster) return updateRadioBroadcaster(radioBroadcaster);
-        else throw new UnknownBroadcasterException(broadcaster.toString());
-    }
-
-    private RadioBroadcaster updateRadioBroadcaster(RadioBroadcaster radioBroadcaster) {
-        return null;
-    }
-
-    @SneakyThrows
-    private GuestBroadcaster updateGuestBroadcaster(GuestBroadcaster guestBroadcaster) {
-        var line = "";
-        while (!(line = reader.readLine()).equals("update")) {
-            switch (line) {
-                case "change name" -> {
-                    System.out.print("print name: ");
-                    var name = reader.readLine();
-                    guestBroadcaster.setName(name);
-                }
-                case "change resume" -> {
-                    System.out.print("print resume ");
-                    var resume = reader.readLine();
-                    guestBroadcaster.setResume(resume);
-                }
-                case "u"
-            }
-        }
-    }
-
-
-    @Override
-    public void removeBroadcaster(String name) {
-        var broadcaster = broadcasters.remove(name);
-        System.out.println(broadcaster != null ? "removed broadcaster " + broadcaster : "broadcaster with this name " + name + "not founded!");
     }
 }
