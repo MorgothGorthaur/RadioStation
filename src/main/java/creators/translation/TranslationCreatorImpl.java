@@ -22,8 +22,9 @@ public class TranslationCreatorImpl implements TranslationCreator{
     @SneakyThrows
     public Translation create() {
         try {
-            System.out.println("print translation time (in minutes) ");
+            System.out.print("print translation time (in minutes) ");
             var builder = new TranslationImpl.Builder(Double.parseDouble(reader.readLine()));
+            printTranslationMenu();
             var line = "";
             while (!(line = reader.readLine()).equals("build")) translationMenuHandler(factory, builder, line);
             return builder.build();
@@ -38,7 +39,6 @@ public class TranslationCreatorImpl implements TranslationCreator{
             case "add music" -> builder.addPart(factory.createPart(PartCreatorFactory.PartType.MUSIC));
             case "add interview" -> builder.addPart(factory.createPart(PartCreatorFactory.PartType.INTERVIEW));
             case "add advertisement" -> builder.addPart(factory.createPart(PartCreatorFactory.PartType.ADVERTISEMENT));
-            case "build" -> System.out.println("built");
             default -> printTranslationMenu();
         }
     }
@@ -46,6 +46,11 @@ public class TranslationCreatorImpl implements TranslationCreator{
     private void printTranslationMenu() {
         System.out.println("""
                 Translation menu
+                add music - for adding music
+                add interview - for adding interview
+                add advertisement - for adding advertisement
+                menu - reprints menu
+                build - builds
                 """);
     }
 }
