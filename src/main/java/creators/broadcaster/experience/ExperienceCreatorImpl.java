@@ -8,7 +8,7 @@ import personality.WorkOnRadioExperienceImpl;
 import java.io.BufferedReader;
 
 @AllArgsConstructor
-public class ExperienceCreatorImpl implements ExperienceCreator{
+class ExperienceCreatorImpl implements ExperienceCreator{
     private final BufferedReader reader;
     @Override
     @SneakyThrows

@@ -2,6 +2,6 @@ package creators.broadcaster;
 
 import personality.Broadcaster;
 
-public interface BroadcasterCreator {
+interface BroadcasterCreator {
     Broadcaster create();
 }

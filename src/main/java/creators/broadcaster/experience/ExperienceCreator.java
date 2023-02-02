@@ -3,6 +3,6 @@ package creators.broadcaster.experience;
 import personality.Experience;
 import personality.WorkOnRadioExperienceImpl;
 
-public interface ExperienceCreator {
+interface ExperienceCreator {
     Experience create();
 }

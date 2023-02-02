@@ -10,7 +10,7 @@ import personality.RadioBroadcaster;
 
 import java.io.BufferedReader;
 
-public class RadioBroadcasterCreator implements BroadcasterCreator{
+class RadioBroadcasterCreator implements BroadcasterCreator{
     private final BufferedReader reader;
     private final ExperienceSetCreator creator;
     public RadioBroadcasterCreator(BufferedReader reader) {

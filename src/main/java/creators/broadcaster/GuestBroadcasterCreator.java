@@ -12,7 +12,7 @@ import personality.GuestBroadcaster;
 import java.io.BufferedReader;
 
 @RequiredArgsConstructor
-public class GuestBroadcasterCreator implements BroadcasterCreator{
+class GuestBroadcasterCreator implements BroadcasterCreator{
     private final BufferedReader reader;
 
     @Override
