@@ -2,7 +2,7 @@ import creators.broadcaster.BroadcasterCreatorFactory;
 import personality.Broadcaster;
 
 public interface HomeWork {
-    void addBroadcaster(BroadcasterCreatorFactory.BroadcasterType type);
+    void addBroadcaster();
 
     void addTranslation(String name);
 
