@@ -7,13 +7,14 @@ import lombok.Getter;
 import translation.part.CommercialPart;
 import translation.part.Part;
 
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
 
-public record TranslationImpl(double price, double minuteDuration, List<Part> parts) implements Translation {
+public record TranslationImpl(double price, double minuteDuration, List<Part> parts) implements Translation, Serializable {
     @Override
     public List<Part> parts() {
         return new ArrayList<>(parts);

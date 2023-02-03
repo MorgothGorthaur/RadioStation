@@ -6,12 +6,13 @@ import personality.experience.Experience;
 import translation.Translation;
 
 
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
 @NonNull
-public class RadioBroadcaster implements Broadcaster{
+public class RadioBroadcaster implements Broadcaster, Serializable {
     private String name;
     private Set<Experience> experiences;
     private Set<Translation> translations;

@@ -4,12 +4,13 @@ import exception.GuestBroadcasterCreationException;
 import lombok.*;
 import translation.Translation;
 
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
 @NonNull
-public class GuestBroadcaster implements Broadcaster{
+public class GuestBroadcaster implements Broadcaster, Serializable {
     private String name;
     private String resume;
     private Set<Translation> translations;

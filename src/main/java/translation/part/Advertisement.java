@@ -3,7 +3,9 @@ package translation.part;
 import exception.AdvertisementCreationException;
 import lombok.NonNull;
 
-public record Advertisement(@NonNull String productName, double minuteDuration) implements CommercialPart {
+import java.io.Serializable;
+
+public record Advertisement(@NonNull String productName, double minuteDuration) implements CommercialPart, Serializable {
     @Override
     public double getPrice() {
         return 5 * minuteDuration;
