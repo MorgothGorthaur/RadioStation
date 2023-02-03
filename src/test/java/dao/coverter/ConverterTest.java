@@ -23,7 +23,7 @@ class ConverterTest {
     Converter converter = new ConverterImpl();
     @Test
     void testInterpret_shouldReturnRadioBroadcaster() {
-        var expected = "R, Victor Tarasov, (E, some radio, 5.0=>E, another radio, 6.0=>), T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|\n";
+        var expected = "R, Victor Tarasov, (E, some radio, 5.0|E, another radio, 6.0|), T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|\n";
         var broadcaster = new RadioBroadcaster("Victor Tarasov",
                 new LinkedHashSet<>(List.of(new WorkOnRadioExperienceImpl("some radio", 5),
                         new WorkOnRadioExperienceImpl("another radio", 6))),
@@ -45,7 +45,7 @@ class ConverterTest {
 
     @Test
     void testInterpret_shouldReturnRadioBroadcaster_withEmptyTranslation() {
-        var expected = "R, Victor Tarasov, (E, some radio, 5.0=>E, another radio, 6.0=>), \n";
+        var expected = "R, Victor Tarasov, (E, some radio, 5.0|E, another radio, 6.0|), \n";
         var broadcaster = new RadioBroadcaster("Victor Tarasov", new LinkedHashSet<>(
                 List.of(new WorkOnRadioExperienceImpl("some radio", 5.0),
                         new WorkOnRadioExperienceImpl("another radio", 6.0))));
@@ -54,7 +54,7 @@ class ConverterTest {
 
     @Test
     void testInterpret_shouldReturnRadioBroadcaster_withTranslation_withoutAnyParts() {
-        var expected = "R, Victor Tarasov, (E, some radio, 5.0=>E, another radio, 6.0=>), T 10.0 15.0 []|\n";
+        var expected = "R, Victor Tarasov, (E, some radio, 5.0|E, another radio, 6.0|), T 10.0 15.0 []|\n";
         var broadcaster = new RadioBroadcaster("Victor Tarasov", new LinkedHashSet<>(
                 List.of(new WorkOnRadioExperienceImpl("some radio", 5.0),
                         new WorkOnRadioExperienceImpl("another radio", 6.0))),
