@@ -1,4 +1,8 @@
 
+import dao.DaoFactory;
+import dao.DaoFactoryImpl;
+import dao.RadioStationDao;
+import dao.StreamDaoImpl;
 import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
@@ -14,12 +18,23 @@ public class App {
 
     @SneakyThrows
     private void run() {
-        System.out.print("print file name: ");
-        var homework = new HomeworkImpl(reader.readLine(), reader);
+        var homework = new HomeworkImpl(chooseDao(),reader);
         printMainMenu();
         var line = "";
         while (!(line = reader.readLine()).equals("exit")) mainMenuHandler(homework, line);
         homework.save();
+    }
+    @SneakyThrows
+    private RadioStationDao chooseDao() {
+        var factory = new DaoFactoryImpl();
+        System.out.print("print file name: ");
+        var fileName = reader.readLine();
+        System.out.println("json or stream?");
+        return switch (reader.readLine()) {
+            case "json" -> factory.getDao(DaoFactory.DaoType.JSON, fileName);
+            case "stream" -> factory.getDao(DaoFactory.DaoType.STREAM, fileName);
+            default -> chooseDao();
+        };
     }
 
     private void mainMenuHandler(HomeworkImpl homework, String line) {

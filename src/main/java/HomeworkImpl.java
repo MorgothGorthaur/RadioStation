@@ -2,7 +2,7 @@ import creators.broadcaster.BroadcasterCreatorFactory;
 import creators.broadcaster.BroadcasterCreatorFactoryImpl;
 import creators.translation.TranslationCreator;
 import creators.translation.TranslationCreatorImpl;
-import dao.DaoImpl;
+import dao.JsonDaoImpl;
 import dao.RadioStationDao;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
@@ -23,8 +23,8 @@ public class HomeworkImpl implements HomeWork {
     private final TranslationCreator translationCreator;
 
     @SneakyThrows
-    public HomeworkImpl(String fileName,BufferedReader reader) {
-        dao = new DaoImpl(fileName);
+    public HomeworkImpl(RadioStationDao dao,BufferedReader reader) {
+        this.dao = dao;
         this.reader = reader;
         broadcasterCreatorFactory = new BroadcasterCreatorFactoryImpl(reader);
         broadcasters = new HashMap<>(dao.read().stream().collect(Collectors.toMap(Broadcaster::getName, broadcaster -> broadcaster)));
