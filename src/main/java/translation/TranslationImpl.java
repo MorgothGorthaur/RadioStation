@@ -48,7 +48,7 @@ public record TranslationImpl(double price, double minuteDuration, List<Part> pa
 
 
         public Builder addParts(Deque<Part> parts) {
-            for (var part : parts) addPart(part);
+            parts.forEach(this::addPart);
             return this;
         }
 
