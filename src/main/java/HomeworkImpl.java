@@ -150,11 +150,13 @@ public class HomeworkImpl implements HomeWork {
 
     private String getRadioBroadcasterMenu() {
         return """
-                         RadioBroadcaster menu
-                print name - for getting name
-                print experiences - for getting experiences
-                print translations - for getting translations
-                exit - returns to main menu
+                ++++++++++++++++++++++++++++++++++++++++++++++
+                         RadioBroadcaster menu               +
+                print name - for getting name                +
+                print experiences - for getting experiences  +
+                print translations - for getting translations+
+                exit - returns to main menu                  +
+                ++++++++++++++++++++++++++++++++++++++++++++++
                 """;
     }
     private String getGuestBroadcasterMenu(){

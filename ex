@@ -1,0 +1,1 @@
+{"@type":"GuestBroadcaster","name":"f","resume":"f","translations":[{"@type":"TranslationImpl","price":0.0,"minuteDuration":4.0,"parts":[{"@type":"Music","singerName":"f","musicName":"f","minuteDuration":2.0},{"@type":"Music","singerName":"1","musicName":"1","minuteDuration":1.0}]}]}

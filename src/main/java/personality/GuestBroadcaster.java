@@ -10,6 +10,7 @@ import java.util.Set;
 
 @Data
 @NonNull
+@NoArgsConstructor
 public class GuestBroadcaster implements Broadcaster, Serializable {
     private String name;
     private String resume;
