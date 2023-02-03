@@ -57,7 +57,7 @@ class RadioBroadcasterCreator implements BroadcasterCreator {
     }
     @SneakyThrows
     private String setName() {
-        System.out.print("print broadcaster name");
+        System.out.print("print radio broadcaster name");
         return reader.readLine();
     }
 }

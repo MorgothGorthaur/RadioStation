@@ -47,13 +47,13 @@ class GuestBroadcasterCreator implements BroadcasterCreator{
     }
     @SneakyThrows
     private String setResume(){
-        System.out.print("print broadcaster resume: ");
+        System.out.print("print guest broadcaster resume: ");
         return reader.readLine();
     }
 
     @SneakyThrows
     private String setName() {
-        System.out.print("print broadcaster name: ");
+        System.out.print("print guest broadcaster name: ");
         return reader.readLine();
     }
 }
