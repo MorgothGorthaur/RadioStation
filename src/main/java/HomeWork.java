@@ -1,6 +1,3 @@
-import creators.broadcaster.BroadcasterCreatorFactory;
-import personality.Broadcaster;
-
 public interface HomeWork {
     void addBroadcaster();
 

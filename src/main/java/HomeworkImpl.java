@@ -1,4 +1,5 @@
 import creators.broadcaster.BroadcasterCreatorFactory;
+import creators.broadcaster.BroadcasterCreatorFactoryImpl;
 import creators.translation.TranslationCreator;
 import creators.translation.TranslationCreatorImpl;
 import dao.DaoImpl;
@@ -25,7 +26,7 @@ public class HomeworkImpl implements HomeWork {
     public HomeworkImpl(String fileName, Lexer lexer, Converter converter, BufferedReader reader) {
         dao = new DaoImpl(fileName, lexer, converter);
         this.reader = reader;
-        broadcasterCreatorFactory = new BroadcasterCreatorFactory(reader);
+        broadcasterCreatorFactory = new BroadcasterCreatorFactoryImpl(reader);
         broadcasters = new HashMap<>(dao.read().stream().collect(Collectors.toMap(Broadcaster::getName, broadcaster -> broadcaster)));
         translationCreator = new TranslationCreatorImpl(reader);
     }
@@ -50,7 +51,7 @@ public class HomeworkImpl implements HomeWork {
         var name = setName();
         var broadcaster = broadcasters.remove(name);
         if (broadcaster != null) { 
-            var updated = broadcasterCreatorFactory.updateBroadcaster(broadcaster);
+            var updated = broadcasterCreatorFactory.update(broadcaster);
             System.out.println("your broadcaster: " + broadcaster );
             addToBroadcasters(updated);
         }
@@ -141,8 +142,8 @@ public class HomeworkImpl implements HomeWork {
         System.out.print("print type [guest/radio]");
         var type = reader.readLine();
         return switch (type) {
-            case "guest" -> broadcasterCreatorFactory.createBroadcaster(BroadcasterCreatorFactory.BroadcasterType.GUEST);
-            case "radio" -> broadcasterCreatorFactory.createBroadcaster(BroadcasterCreatorFactory.BroadcasterType.RADIO);
+            case "guest" -> broadcasterCreatorFactory.create(BroadcasterCreatorFactory.BroadcasterType.GUEST);
+            case "radio" -> broadcasterCreatorFactory.create(BroadcasterCreatorFactory.BroadcasterType.RADIO);
             default -> createBroadcasterHandler();
         };
     }
