@@ -67,7 +67,7 @@ public class HomeworkImpl implements HomeWork {
 
     @Override
     public void printBroadcasters() {
-        System.out.println(broadcasters);
+        broadcasters.values().forEach(System.out::println);
     }
 
     @Override

@@ -1,1 +1,1 @@
-{"@type":"GuestBroadcaster","name":"Victor","resume":"resume","translations":[]}
+{"@type":"GuestBroadcaster","name":"Victor","resume":"resume","translations":[{"@type":"TranslationImpl","price":0.0,"minuteDuration":10.0,"parts":[{"@type":"Music","singerName":"f","musicName":"f","minuteDuration":5.0}]}]}
