@@ -25,7 +25,7 @@ class LexerTest {
     Lexer lexer = new LexerImpl();
     @Test
     void testInterpret_shouldReturnRadioBroadcaster() {
-        var inputString = "R, Victor Tarasov, (E, some radio, 5.0=>E, another radio, 6.0=>), T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|";
+        var inputString = "R, Victor Tarasov, (E, some radio, 5.0|E, another radio, 6.0|), T 10.0 15.0 [M, some singer, some music, 5.0=>A, some product, 5.0=>M, another singer, another music, 5.0=>]|";
         var expected = new RadioBroadcaster("Victor Tarasov",
                 new LinkedHashSet<>(List.of(new WorkOnRadioExperienceImpl("some radio", 5),
                         new WorkOnRadioExperienceImpl("another radio", 6))),
@@ -47,7 +47,7 @@ class LexerTest {
 
     @Test
     void testInterpret_shouldReturnRadioBroadcaster_withEmptyTranslation() {
-        var inputString = "R, Victor Tarasov, (E, some radio, 5.0=>E, another radio, 6.0=>), ";
+        var inputString = "R, Victor Tarasov, (E, some radio, 5.0|E, another radio, 6.0|), ";
         var expected = new RadioBroadcaster("Victor Tarasov", new LinkedHashSet<>(
                 List.of(new WorkOnRadioExperienceImpl("some radio", 5.0),
                         new WorkOnRadioExperienceImpl("another radio", 6.0))));
@@ -56,7 +56,7 @@ class LexerTest {
 
     @Test
     void testInterpret_shouldReturnRadioBroadcaster_withTranslation_withoutAnyParts() {
-        var inputString = "R, Victor Tarasov, (E, some radio, 5.0=>E, another radio, 6.0=>), T 10.0 15.0 []|";
+        var inputString = "R, Victor Tarasov, (E, some radio, 5.0|E, another radio, 6.0|), T 10.0 15.0 []|";
         var expected = new RadioBroadcaster("Victor Tarasov", new LinkedHashSet<>(
                 List.of(new WorkOnRadioExperienceImpl("some radio", 5.0),
                         new WorkOnRadioExperienceImpl("another radio", 6.0))),
