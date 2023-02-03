@@ -29,7 +29,7 @@ public class App {
         var factory = new DaoFactoryImpl();
         System.out.print("print file name: ");
         var fileName = reader.readLine();
-        System.out.println("json or stream?");
+        System.out.print("json or stream?");
         return switch (reader.readLine()) {
             case "json" -> factory.getDao(DaoFactory.DaoType.JSON, fileName);
             case "stream" -> factory.getDao(DaoFactory.DaoType.STREAM, fileName);
