@@ -43,6 +43,7 @@ public class App {
                 remove broadcaster - for removing broadcaster
                 print broadcasters - for printing all broadcasters
                 print broadcaster - for printing broadcaster
+                exit - ends program
                 """);
     }
 }

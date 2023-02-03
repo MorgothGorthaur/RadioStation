@@ -39,6 +39,9 @@ public class TranslationCreatorImpl implements TranslationCreator{
             case "add music" -> builder.addPart(factory.createPart(PartCreatorFactory.PartType.MUSIC));
             case "add interview" -> builder.addPart(factory.createPart(PartCreatorFactory.PartType.INTERVIEW));
             case "add advertisement" -> builder.addPart(factory.createPart(PartCreatorFactory.PartType.ADVERTISEMENT));
+            case "get free time" -> System.out.println(builder.getFreeTime());
+            case "get commercial part" -> System.out.println(builder.getCommercialTime());
+            case "get price" -> System.out.println(builder.getPrice());
             default -> printTranslationMenu();
         }
     }
@@ -49,6 +52,9 @@ public class TranslationCreatorImpl implements TranslationCreator{
                 add music - for adding music
                 add interview - for adding interview
                 add advertisement - for adding advertisement
+                get free time - for getting free time
+                get commercial part - for getting commercial part time
+                get price - for getting price of translation
                 menu - reprints menu
                 build - builds
                 """);
