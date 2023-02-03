@@ -19,7 +19,7 @@ public class JsonDaoImpl implements RadioStationDao {
     @Override
     @SneakyThrows
     public void write(List<Broadcaster> broadcasters) {
-        try(var writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+        try (var writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (var br : broadcasters) writer.append(mapper.writeValueAsString(br)).append("\n");
         }
     }
@@ -27,13 +27,15 @@ public class JsonDaoImpl implements RadioStationDao {
     @Override
     @SneakyThrows
     public List<Broadcaster> read() {
-        if (new File(FILE_NAME).isFile()) {
-            try (var reader = new BufferedReader(new FileReader(FILE_NAME))) {
-                var broadcasters = new ArrayList<Broadcaster>();
-                var line = "";
-                while ((line = reader.readLine()) != null) broadcasters.add(mapper.readValue(line, Broadcaster.class));
-                return broadcasters;
-            }
-        } return new ArrayList<>();
+        try (var reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            var broadcasters = new ArrayList<Broadcaster>();
+            var line = "";
+            while ((line = reader.readLine()) != null) broadcasters.add(mapper.readValue(line, Broadcaster.class));
+            return broadcasters;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return new ArrayList<>();
+        }
+
     }
 }

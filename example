@@ -1,3 +1,0 @@
-{"@type":"GuestBroadcaster","name":"Victor","resume":"some resume","translations":[{"@type":"TranslationImpl","price":0.0,"minuteDuration":4.0,"parts":[]}]}
-{"@type":"RadioBroadcaster","name":"Vitaliy","experiences":[{"@type":"WorkOnRadioExperienceImpl","stationName":"Rock-n-roll","yearExperience":4.0}],"translations":[]}
-{"@type":"GuestBroadcaster","name":"Vasya","resume":"Vasya!","translations":[]}
