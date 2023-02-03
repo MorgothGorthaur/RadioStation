@@ -23,6 +23,7 @@ public class DaoImpl implements RadioStationDao {
         try(var input = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
             return (ArrayList<Broadcaster>) input.readObject();
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             return new ArrayList<>();
         }
     }
