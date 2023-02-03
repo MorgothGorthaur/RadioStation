@@ -86,7 +86,7 @@ public class LexerImpl implements Lexer {
     private Set<Experience> interpretExperiences(String substring) {
         var experiencesSet = new LinkedHashSet<Experience>();
         if(substring.equals("")) return experiencesSet;
-        var expArr = substring.split("=>");
+        var expArr = substring.split("\\|");
         for (var experience : expArr) {
             var elem = experience.split(", ");
             if(elem.length != 3 && !elem[0].equals("E")) throw new CantReadExperienceException(experience);

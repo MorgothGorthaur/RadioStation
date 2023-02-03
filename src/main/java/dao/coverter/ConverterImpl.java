@@ -32,7 +32,7 @@ public class ConverterImpl implements Converter {
 
     private String convertRadioBroadcaster(RadioBroadcaster radioBroadcaster) {
         var str = new StringBuilder("R, " + radioBroadcaster.getName() + ", (");
-        for (var exp : radioBroadcaster.getExperiences()) str.append(convertExperience(exp)).append("=>");
+        for (var exp : radioBroadcaster.getExperiences()) str.append(convertExperience(exp)).append("|");
         str.append("), ");
         for (var translation : radioBroadcaster.getTranslations()) str.append(convertTranslation(translation)).append("|");
         return str.toString();
