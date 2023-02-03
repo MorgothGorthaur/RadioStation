@@ -14,7 +14,8 @@ public class App {
 
     @SneakyThrows
     private void run() {
-        var homework = new HomeworkImpl("save", reader);
+        System.out.print("print file name: ");
+        var homework = new HomeworkImpl(reader.readLine(), reader);
         printMainMenu();
         var line = "";
         while (!(line = reader.readLine()).equals("exit")) mainMenuHandler(homework, line);
