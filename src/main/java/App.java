@@ -51,14 +51,16 @@ public class App {
 
     private void printMainMenu() {
         System.out.println("""
-                        main menu
-                add broadcaster - for adding broadcaster
-                add translation - for adding translation
-                update broadcaster - for updating broadcaster
-                remove broadcaster - for removing broadcaster
-                print broadcasters - for printing all broadcasters
-                print broadcaster - for printing broadcaster
-                exit - ends program
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++        
+                +                   main menu                        +
+                + add broadcaster - for adding broadcaster           +
+                + add translation - for adding translation           +
+                + update broadcaster - for updating broadcaster      +
+                + remove broadcaster - for removing broadcaster      + 
+                + print broadcasters - for printing all broadcasters +
+                + print broadcaster - for printing broadcaster       +
+                + exit - ends program                                +
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 """);
     }
 }

@@ -39,10 +39,12 @@ class GuestBroadcasterCreator implements BroadcasterCreator{
 
     private void pintUpdateMenu() {
         System.out.println("""
-                        update menu
-                update name - for updating name
-                update resume - for updating resume
-                update - update
+                +++++++++++++++++++++++++++++++++++++++
+                +             update menu             +
+                + update name - for updating name     +
+                + update resume - for updating resume +
+                + update - update                     +
+                +++++++++++++++++++++++++++++++++++++++
                 """);
     }
     @SneakyThrows

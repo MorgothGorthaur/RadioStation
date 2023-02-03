@@ -49,15 +49,17 @@ class RadioBroadcasterCreator implements BroadcasterCreator {
 
     private void printUpdateMenu() {
         System.out.println("""
-                        update menu
-                update name - for updating name
-                update experience - for updating experience
-                update - update
+                +++++++++++++++++++++++++++++++++++++++++++++++
+                +                update menu                  +
+                + update name - for updating name             +
+                + update experience - for updating experience +
+                + update - update                             +
+                +++++++++++++++++++++++++++++++++++++++++++++++
                 """);
     }
     @SneakyThrows
     private String setName() {
-        System.out.print("print radio broadcaster name");
+        System.out.print("print radio broadcaster name: ");
         return reader.readLine();
     }
 }

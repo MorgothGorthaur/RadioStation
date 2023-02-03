@@ -139,7 +139,7 @@ public class HomeworkImpl implements HomeWork {
 
     @SneakyThrows
     private Broadcaster createBroadcasterHandler() {
-        System.out.print("print type [guest/radio]");
+        System.out.print("print type [guest/radio]: ");
         var type = reader.readLine();
         return switch (type) {
             case "guest" -> broadcasterCreatorFactory.create(BroadcasterCreatorFactory.BroadcasterType.GUEST);
@@ -150,22 +150,24 @@ public class HomeworkImpl implements HomeWork {
 
     private String getRadioBroadcasterMenu() {
         return """
-                ++++++++++++++++++++++++++++++++++++++++++++++
-                         RadioBroadcaster menu               +
-                print name - for getting name                +
-                print experiences - for getting experiences  +
-                print translations - for getting translations+
-                exit - returns to main menu                  +
-                ++++++++++++++++++++++++++++++++++++++++++++++
+                +++++++++++++++++++++++++++++++++++++++++++++++++
+                +         RadioBroadcaster menu                 +
+                + print name - for getting name                 +
+                + print experiences - for getting experiences   +
+                + print translations - for getting translations +
+                + exit - returns to main menu                   +
+                +++++++++++++++++++++++++++++++++++++++++++++++++
                 """;
     }
     private String getGuestBroadcasterMenu(){
         return """
-                         GuestBroadcaster menu
-                print name - for getting name
-                print resume - for getting resume
-                print translations - for getting translations
-                exit - returns to main menu
+                +++++++++++++++++++++++++++++++++++++++++++++++++                     
+                +         GuestBroadcaster menu                 +
+                + print name - for getting name                 +
+                + print resume - for getting resume             +
+                + print translations - for getting translations +
+                + exit - returns to main menu                   +
+                +++++++++++++++++++++++++++++++++++++++++++++++++
                 """;
     }
 

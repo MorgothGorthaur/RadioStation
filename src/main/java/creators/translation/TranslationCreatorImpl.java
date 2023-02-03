@@ -48,15 +48,17 @@ public class TranslationCreatorImpl implements TranslationCreator{
 
     private void printTranslationMenu() {
         System.out.println("""
-                Translation menu
-                add music - for adding music
-                add interview - for adding interview
-                add advertisement - for adding advertisement
-                get free time - for getting free time
-                get commercial part - for getting commercial part time
-                get price - for getting price of translation
-                menu - reprints menu
-                build - builds
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                +                  Translation menu                      +
+                + add music - for adding music                           +
+                + add interview - for adding interview                   +
+                + add advertisement - for adding advertisement           +
+                + get free time - for getting free time                  +
+                + get commercial part - for getting commercial part time +
+                + get price - for getting price of translation           +
+                + menu - reprints menu                                   +
+                + build - builds                                         +
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 """);
     }
 }
