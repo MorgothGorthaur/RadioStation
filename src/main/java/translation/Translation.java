@@ -9,13 +9,14 @@ import translation.part.Interview;
 import translation.part.Music;
 import translation.part.Part;
 
+import java.io.Serializable;
 import java.util.Deque;
 import java.util.List;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
         @JsonSubTypes.Type(TranslationImpl.class),
 })
-public interface Translation {
+public interface Translation extends Serializable {
     double price();
     double minuteDuration();
     List<Part> parts();

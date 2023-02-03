@@ -14,7 +14,7 @@ import java.util.Deque;
 import java.util.List;
 
 
-public record TranslationImpl(double price, double minuteDuration, List<Part> parts) implements Translation, Serializable {
+public record TranslationImpl(double price, double minuteDuration, List<Part> parts) implements Translation{
     @Override
     public List<Part> parts() {
         return new ArrayList<>(parts);

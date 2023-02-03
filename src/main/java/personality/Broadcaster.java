@@ -8,11 +8,12 @@ import translation.part.Advertisement;
 import translation.part.Interview;
 import translation.part.Music;
 
+import java.io.Serializable;
 import java.util.Set;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({ @JsonSubTypes.Type(GuestBroadcaster.class), @JsonSubTypes.Type(RadioBroadcaster.class),
 })
-public interface Broadcaster {
+public interface Broadcaster extends Serializable {
     String getName();
     Set<Translation> getTranslations();
 }

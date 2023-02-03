@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 @NonNull
 @NoArgsConstructor
-public class RadioBroadcaster implements Broadcaster, Serializable {
+public class RadioBroadcaster implements Broadcaster{
     private String name;
     private Set<Experience> experiences;
     private Set<Translation> translations;

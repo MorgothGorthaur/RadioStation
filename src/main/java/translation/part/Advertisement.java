@@ -5,7 +5,7 @@ import lombok.NonNull;
 
 import java.io.Serializable;
 
-public record Advertisement(@NonNull String productName, double minuteDuration) implements CommercialPart, Serializable {
+public record Advertisement(@NonNull String productName, double minuteDuration) implements CommercialPart {
     @Override
     public double getPrice() {
         return 5 * minuteDuration;

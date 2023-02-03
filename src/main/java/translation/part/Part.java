@@ -6,10 +6,12 @@ import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
 import translation.TranslationImpl;
 
+import java.io.Serializable;
+
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({ @JsonSubTypes.Type(GuestBroadcaster.class), @JsonSubTypes.Type(RadioBroadcaster.class),
         @JsonSubTypes.Type(Music.class), @JsonSubTypes.Type(Interview.class), @JsonSubTypes.Type(Advertisement.class)
 })
-public interface Part {
+public interface Part extends Serializable {
     double minuteDuration();
 }
