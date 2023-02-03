@@ -1,6 +1,7 @@
 package personality;
 import exception.RadioBroadcasterCreationException;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import personality.experience.Experience;
 import translation.Translation;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Data
 @NonNull
+@NoArgsConstructor
 public class RadioBroadcaster implements Broadcaster, Serializable {
     private String name;
     private Set<Experience> experiences;

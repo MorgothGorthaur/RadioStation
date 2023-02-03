@@ -20,7 +20,7 @@ public class JsonDaoImpl implements RadioStationDao {
     @SneakyThrows
     public void write(List<Broadcaster> broadcasters) {
         try(var writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            for (var br : broadcasters) writer.append(mapper.writeValueAsString(br));
+            for (var br : broadcasters) writer.append(mapper.writeValueAsString(br)).append("\n");
         }
     }
 
