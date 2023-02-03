@@ -53,9 +53,13 @@ public record TranslationImpl(double price, double minuteDuration, List<Part> pa
         }
 
         public Translation build() {
+            checkConditions();
+            return new TranslationImpl(price, minuteDuration, parts);
+        }
+
+        private void checkConditions() {
             if(freeTime < 0) throw new AllTranslationTimeIsUsedException();
             if(commercialTime > minuteDuration /2) throw new TooBigCommercialTimeException(commercialTime, minuteDuration);
-            return new TranslationImpl(price, minuteDuration, parts);
         }
 
     }
