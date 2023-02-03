@@ -1,5 +1,4 @@
-import dao.coverter.ConverterImpl;
-import dao.lexer.LexerImpl;
+
 import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
@@ -15,7 +14,7 @@ public class App {
 
     @SneakyThrows
     private void run() {
-        var homework = new HomeworkImpl("save", new LexerImpl(), new ConverterImpl(), reader);
+        var homework = new HomeworkImpl("check", reader);
         printMainMenu();
         var line = "";
         while (!(line = reader.readLine()).equals("exit")) mainMenuHandler(homework, line);

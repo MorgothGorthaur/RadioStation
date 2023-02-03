@@ -4,14 +4,13 @@ import creators.translation.TranslationCreator;
 import creators.translation.TranslationCreatorImpl;
 import dao.DaoImpl;
 import dao.RadioStationDao;
-import dao.coverter.Converter;
-import dao.lexer.Lexer;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
 import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,8 +22,9 @@ public class HomeworkImpl implements HomeWork {
     private final Map<String, Broadcaster> broadcasters;
     private final TranslationCreator translationCreator;
 
-    public HomeworkImpl(String fileName, Lexer lexer, Converter converter, BufferedReader reader) {
-        dao = new DaoImpl(fileName, lexer, converter);
+    @SneakyThrows
+    public HomeworkImpl(String fileName,BufferedReader reader) {
+        dao = new DaoImpl(fileName);
         this.reader = reader;
         broadcasterCreatorFactory = new BroadcasterCreatorFactoryImpl(reader);
         broadcasters = new HashMap<>(dao.read().stream().collect(Collectors.toMap(Broadcaster::getName, broadcaster -> broadcaster)));
@@ -80,7 +80,7 @@ public class HomeworkImpl implements HomeWork {
 
     @Override
     public void save() {
-        dao.write(broadcasters.values());
+        dao.write(new ArrayList<>(broadcasters.values()));
     }
 
     private void getBroadcasterTypeHandler(Broadcaster broadcaster) {

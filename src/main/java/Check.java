@@ -19,7 +19,7 @@ public class Check {
                 List.of(new WorkOnRadioExperienceImpl("some radio", 5.0),
                         new WorkOnRadioExperienceImpl("another radio", 6.0))),
                 new LinkedHashSet<>(List.of(new TranslationImpl(10.0, 15.0, new ArrayList<Part>()))));
-        var guest =  new GuestBroadcaster("Victor Tarasov", "some resume, @ gg.",
+        var guest =  new GuestBroadcaster("Victor", "some resume, @ gg.",
                 new LinkedHashSet<>(List.of(new TranslationImpl(10.0, 15.0, new ArrayList<>(List.of(new Music("some singer", "some music", 5.0)))))));
         var original = new ArrayList<>(List.of(broadcaster, guest));
         try(var out = new ObjectOutputStream(new FileOutputStream("check"))){
