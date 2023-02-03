@@ -37,11 +37,9 @@ public record TranslationImpl(double price, double minuteDuration, List<Part> pa
         }
 
         public Builder addPart(Part part) {
-            if (freeTime - part.minuteDuration() < 0) throw new AllTranslationTimeIsUsedException();
             freeTime -= part.minuteDuration();
             if (part instanceof CommercialPart commercialPart) {
                 price += commercialPart.getPrice();
-                if (commercialTime > minuteDuration / 2) throw new TooBigCommercialTimeException(commercialTime, minuteDuration);
                 commercialTime += commercialPart.minuteDuration();
             }
             parts.add(part);
@@ -55,6 +53,8 @@ public record TranslationImpl(double price, double minuteDuration, List<Part> pa
         }
 
         public Translation build() {
+            if(freeTime < 0) throw new AllTranslationTimeIsUsedException();
+            if(commercialTime > minuteDuration /2) throw new TooBigCommercialTimeException(commercialTime, minuteDuration);
             return new TranslationImpl(price, minuteDuration, parts);
         }
 
