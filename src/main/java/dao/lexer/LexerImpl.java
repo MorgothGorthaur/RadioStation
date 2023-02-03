@@ -25,14 +25,14 @@ public class LexerImpl implements Lexer {
     private GuestBroadcaster interpretGuestBroadcaster(String stringValue) {
         var name = stringValue.substring(0, stringValue.indexOf(", "));
         var resume = stringValue.substring(stringValue.indexOf("(") + 1, stringValue.indexOf(")")).strip();
-        var translations = interpretTranslations(stringValue.substring(stringValue.indexOf(")") +2).strip());
+        var translations = interpretTranslations(stringValue.substring(stringValue.lastIndexOf("(")+1, stringValue.lastIndexOf(")")).strip());
         return new GuestBroadcaster(name, resume, translations);
     }
 
     private RadioBroadcaster interpretRadioBroadcaster(String stringValue) {
         var name = stringValue.substring(0, stringValue.indexOf(", "));
         var experiences = interpretExperiences(stringValue.substring(stringValue.indexOf("(") + 1, stringValue.indexOf(")")));
-        var translations = interpretTranslations(stringValue.substring(stringValue.indexOf(")") + 2).strip());
+        var translations = interpretTranslations(stringValue.substring(stringValue.lastIndexOf("(")+1, stringValue.lastIndexOf(")")).strip());
         return new RadioBroadcaster(name, experiences, translations);
     }
 
