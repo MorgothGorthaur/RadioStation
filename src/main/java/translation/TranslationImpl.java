@@ -45,7 +45,7 @@ public record TranslationImpl(double price, double minuteDuration, List<Part> pa
         }
 
 
-        public Builder addParts(Deque<Part> parts) {
+        public Builder addParts(Iterable<Part> parts) {
             parts.forEach(this::addPart);
             return this;
         }
