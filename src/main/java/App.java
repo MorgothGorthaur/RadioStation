@@ -30,10 +30,10 @@ public class App {
         var factory = new DaoFactoryImpl();
         System.out.print("print file name: ");
         var fileName = reader.readLine();
-        System.out.print("json or stream?");
+        System.out.print("json or byte?");
         return switch (reader.readLine()) {
             case "json" -> factory.getDao(DaoFactory.DaoType.JSON, fileName);
-            case "stream" -> factory.getDao(DaoFactory.DaoType.STREAM, fileName);
+            case "byte" -> factory.getDao(DaoFactory.DaoType.STREAM, fileName);
             default -> chooseDao();
         };
     }
