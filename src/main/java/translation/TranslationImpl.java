@@ -7,8 +7,6 @@ import lombok.Getter;
 import translation.part.CommercialPart;
 import translation.part.Part;
 
-import java.io.Serializable;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
@@ -39,7 +37,7 @@ public record TranslationImpl(double price, double minuteDuration, List<Part> pa
         public Builder addPart(Part part) {
             freeTime -= part.minuteDuration();
             if (part instanceof CommercialPart commercialPart) {
-                price += commercialPart.getPrice();
+                price += commercialPart.price();
                 commercialTime += commercialPart.minuteDuration();
             }
             parts.add(part);

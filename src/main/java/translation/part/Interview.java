@@ -5,14 +5,13 @@ import lombok.NonNull;
 
 import java.io.Serializable;
 
-public record Interview(@NonNull String interviewee, double minuteDuration) implements CommercialPart {
+public record Interview(@NonNull String interviewee, double minuteDuration, double price) implements CommercialPart {
 
     public Interview{
         if(interviewee.equals("") || minuteDuration <= 0) throw new InterviewCreationException();
     }
-    @Override
-    public double getPrice() {
-        return 30 * minuteDuration;
+    public Interview(String interviewee, double minuteDuration) {
+        this(interviewee, minuteDuration, 30 * minuteDuration);
     }
 
 }

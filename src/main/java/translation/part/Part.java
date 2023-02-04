@@ -12,7 +12,6 @@ import java.io.Serializable;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({@JsonSubTypes.Type(Music.class), @JsonSubTypes.Type(Interview.class), @JsonSubTypes.Type(Advertisement.class)
 })
-@JsonIgnoreProperties(ignoreUnknown = true)
 public interface Part extends Serializable {
     double minuteDuration();
 }
