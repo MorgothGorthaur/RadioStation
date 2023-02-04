@@ -41,6 +41,7 @@ class RadioBroadcasterCreator implements BroadcasterCreator {
             switch (line){
                 case "update name" -> updated.setName(setName());
                 case "update experience" -> updated.setExperiences(creator.create());
+                case "remove experience" -> updated.getExperiences().clear();
                 default -> printUpdateMenu();
             }
         }
@@ -49,12 +50,13 @@ class RadioBroadcasterCreator implements BroadcasterCreator {
 
     private void printUpdateMenu() {
         System.out.println("""
-                +++++++++++++++++++++++++++++++++++++++++++++++
-                +                update menu                  +
-                + update name - for updating name             +
-                + update experience - for updating experience +
-                + update - update                             +
-                +++++++++++++++++++++++++++++++++++++++++++++++
+                +++++++++++++++++++++++++++++++++++++++++++++++++
+                +                update menu                    +
+                + update name - for updating name               +
+                + update experience - for adding new experience +
+                + remove experience - for remove all experiences+
+                + update - update                               +
+                +++++++++++++++++++++++++++++++++++++++++++++++++
                 """);
     }
     @SneakyThrows
