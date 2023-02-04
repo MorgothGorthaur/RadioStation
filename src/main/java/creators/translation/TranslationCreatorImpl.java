@@ -1,6 +1,7 @@
 package creators.translation;
 
 import creators.translation.part.PartCreatorFactory;
+import creators.translation.part.PartCreatorFactoryImpl;
 import exception.AllTranslationTimeIsUsedException;
 import exception.TooBigCommercialTimeException;
 import lombok.SneakyThrows;
@@ -11,10 +12,10 @@ import java.io.BufferedReader;
 
 
 public class TranslationCreatorImpl implements TranslationCreator{
-    private final PartCreatorFactory factory;
+    private final PartCreatorFactoryImpl factory;
     private final BufferedReader reader;
     public TranslationCreatorImpl(BufferedReader reader){
-        factory = new PartCreatorFactory(reader);
+        factory = new PartCreatorFactoryImpl(reader);
         this.reader = reader;
     }
 
@@ -34,7 +35,7 @@ public class TranslationCreatorImpl implements TranslationCreator{
         }
     }
 
-    private void translationMenuHandler(PartCreatorFactory factory, TranslationImpl.Builder builder, String line) {
+    private void translationMenuHandler(PartCreatorFactoryImpl factory, TranslationImpl.Builder builder, String line) {
         switch (line) {
             case "add music" -> builder.addPart(factory.createPart(PartCreatorFactory.PartType.MUSIC));
             case "add interview" -> builder.addPart(factory.createPart(PartCreatorFactory.PartType.INTERVIEW));
