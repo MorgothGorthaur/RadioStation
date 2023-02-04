@@ -25,16 +25,18 @@ class GuestBroadcasterCreator implements BroadcasterCreator{
     @SneakyThrows
     public Broadcaster update(Broadcaster broadcaster) {
         var guest = (GuestBroadcaster) broadcaster;
+        var name = guest.getName();
+        var resume = guest.getResume();
         pintUpdateMenu();
         var line = "";
         while (!(line = reader.readLine()).equals("update")) {
             switch (line) {
-                case "update name" -> guest.setName(setName());
-                case "update resume" -> guest.setResume(setResume());
+                case "update name" -> name = setName();
+                case "update resume" -> resume = setResume();
                 default -> pintUpdateMenu();
             }
         }
-        return guest;
+        return new GuestBroadcaster(name, resume);
     }
 
     private void pintUpdateMenu() {

@@ -35,17 +35,19 @@ class RadioBroadcasterCreator implements BroadcasterCreator {
     @SneakyThrows
     public Broadcaster update(Broadcaster broadcaster) {
         var updated = (RadioBroadcaster) broadcaster;
+        var name = updated.getName();
+        var experiences = updated.getExperiences();
         var line = "";
         printUpdateMenu();
         while (!(line = reader.readLine()).equals("update")) {
             switch (line){
-                case "update name" -> updated.setName(setName());
-                case "update experience" -> updated.setExperiences(creator.create());
-                case "remove experience" -> updated.getExperiences().clear();
+                case "update name" -> name = setName();
+                case "update experience" -> experiences.addAll(creator.create());
+                case "remove experience" -> experiences.clear();
                 default -> printUpdateMenu();
             }
         }
-        return updated;
+        return new RadioBroadcaster(name, experiences, updated.getTranslations());
     }
 
     private void printUpdateMenu() {

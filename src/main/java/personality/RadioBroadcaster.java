@@ -1,4 +1,5 @@
 package personality;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import exception.RadioBroadcasterCreationException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.Set;
 public class RadioBroadcaster implements Broadcaster{
     @NonNull
     private String name;
+    @JsonDeserialize(as=LinkedHashSet.class)
     @NonNull
     private Set<Experience> experiences;
     @NonNull
