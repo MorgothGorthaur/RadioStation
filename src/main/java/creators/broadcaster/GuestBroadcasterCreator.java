@@ -6,7 +6,6 @@ import personality.Broadcaster;
 import personality.GuestBroadcaster;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
 @RequiredArgsConstructor
 class GuestBroadcasterCreator implements BroadcasterCreator{
@@ -24,19 +23,24 @@ class GuestBroadcasterCreator implements BroadcasterCreator{
     @Override
     @SneakyThrows
     public Broadcaster update(Broadcaster broadcaster) {
-        var guest = (GuestBroadcaster) broadcaster;
-        var name = guest.getName();
-        var resume = guest.getResume();
-        pintUpdateMenu();
-        var line = "";
-        while (!(line = reader.readLine()).equals("update")) {
-            switch (line) {
-                case "update name" -> name = setName();
-                case "update resume" -> resume = setResume();
-                default -> pintUpdateMenu();
+        try {
+            var guest = (GuestBroadcaster) broadcaster;
+            var name = guest.name();
+            var resume = guest.resume();
+            pintUpdateMenu();
+            var line = "";
+            while (!(line = reader.readLine()).equals("update")) {
+                switch (line) {
+                    case "update name" -> name = setName();
+                    case "update resume" -> resume = setResume();
+                    default -> pintUpdateMenu();
+                }
             }
+            return new GuestBroadcaster(name, resume);
+        } catch (GuestBroadcasterCreationException ex) {
+            System.out.println(ex.getMessage());
+            return update(broadcaster);
         }
-        return new GuestBroadcaster(name, resume);
     }
 
     private void pintUpdateMenu() {

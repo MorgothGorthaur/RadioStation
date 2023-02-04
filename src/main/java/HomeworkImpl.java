@@ -26,7 +26,7 @@ public class HomeworkImpl implements HomeWork {
         this.dao = dao;
         this.reader = reader;
         broadcasterCreatorFactory = new BroadcasterCreatorFactoryImpl(reader);
-        broadcasters = new HashMap<>(dao.read().stream().collect(Collectors.toMap(Broadcaster::getName, broadcaster -> broadcaster)));
+        broadcasters = new HashMap<>(dao.read().stream().collect(Collectors.toMap(Broadcaster::name, broadcaster -> broadcaster)));
         translationCreator = new TranslationCreatorImpl(reader);
     }
 
@@ -41,7 +41,7 @@ public class HomeworkImpl implements HomeWork {
     public void addTranslation() {
         var name = setName();
         var broadcaster = broadcasters.get(name);
-        if (broadcaster != null) broadcaster.getTranslations().add(translationCreator.create());
+        if (broadcaster != null) broadcaster.translations().add(translationCreator.create());
         else System.out.println("broadcaster with name " + name + " not founded!");
     }
 
@@ -93,9 +93,9 @@ public class HomeworkImpl implements HomeWork {
         var line = "";
         while (!(line = reader.readLine()).equals("exit")){
             switch (line) {
-                case "print name" -> System.out.println(radioBroadcaster.getName());
-                case "print experiences" -> radioBroadcaster.getExperiences().forEach(System.out::println);
-                case "print translations" -> radioBroadcaster.getTranslations().forEach(System.out::println);
+                case "print name" -> System.out.println(radioBroadcaster.name());
+                case "print experiences" -> radioBroadcaster.experiences().forEach(System.out::println);
+                case "print translations" -> radioBroadcaster.translations().forEach(System.out::println);
                 default -> printRadioBroadcasterMenu();
             }
         }
@@ -109,9 +109,9 @@ public class HomeworkImpl implements HomeWork {
         var line = "";
         while (!(line = reader.readLine()).equals("exit")) {
             switch (line) {
-                case "print name" -> System.out.println(guestBroadcaster.getName());
-                case "print resume" -> System.out.println(guestBroadcaster.getResume());
-                case "print translations" -> guestBroadcaster.getTranslations().forEach(System.out::println);
+                case "print name" -> System.out.println(guestBroadcaster.name());
+                case "print resume" -> System.out.println(guestBroadcaster.resume());
+                case "print translations" -> guestBroadcaster.translations().forEach(System.out::println);
                 default -> printGuestBroadcasterMenu();
             }
         }
@@ -120,8 +120,8 @@ public class HomeworkImpl implements HomeWork {
 
 
     private void addToBroadcasters(Broadcaster broadcaster) {
-        if (broadcasters.containsKey(broadcaster.getName()) && rewriteBroadcaster()) broadcasters.put(broadcaster.getName(), broadcaster);
-        else broadcasters.put(broadcaster.getName(), broadcaster);
+        if (broadcasters.containsKey(broadcaster.name()) && rewriteBroadcaster()) broadcasters.put(broadcaster.name(), broadcaster);
+        else broadcasters.put(broadcaster.name(), broadcaster);
     }
 
     @SneakyThrows

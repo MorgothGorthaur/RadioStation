@@ -2,14 +2,11 @@ package creators.broadcaster;
 
 import creators.broadcaster.experience.ExperienceSetCreator;
 import exception.RadioBroadcasterCreationException;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
 import personality.RadioBroadcaster;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
 class RadioBroadcasterCreator implements BroadcasterCreator {
     private final BufferedReader reader;
@@ -34,20 +31,25 @@ class RadioBroadcasterCreator implements BroadcasterCreator {
     @Override
     @SneakyThrows
     public Broadcaster update(Broadcaster broadcaster) {
-        var updated = (RadioBroadcaster) broadcaster;
-        var name = updated.getName();
-        var experiences = updated.getExperiences();
-        var line = "";
-        printUpdateMenu();
-        while (!(line = reader.readLine()).equals("update")) {
-            switch (line){
-                case "update name" -> name = setName();
-                case "update experience" -> experiences.addAll(creator.create());
-                case "remove experience" -> experiences.clear();
-                default -> printUpdateMenu();
+        try {
+            var updated = (RadioBroadcaster) broadcaster;
+            var name = updated.name();
+            var experiences = updated.experiences();
+            var line = "";
+            printUpdateMenu();
+            while (!(line = reader.readLine()).equals("update")) {
+                switch (line) {
+                    case "update name" -> name = setName();
+                    case "update experience" -> experiences.addAll(creator.create());
+                    case "remove experience" -> experiences.clear();
+                    default -> printUpdateMenu();
+                }
             }
+            return new RadioBroadcaster(name, experiences, updated.translations());
+        } catch (RadioBroadcasterCreationException ex) {
+            System.out.println(ex.getMessage());
+            return update(broadcaster);
         }
-        return new RadioBroadcaster(name, experiences, updated.getTranslations());
     }
 
     private void printUpdateMenu() {
