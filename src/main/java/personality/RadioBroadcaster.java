@@ -12,13 +12,15 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
-@NonNull
 @NoArgsConstructor
 public class RadioBroadcaster implements Broadcaster{
+    @NonNull
     private String name;
+    @NonNull
     private Set<Experience> experiences;
+    @NonNull
     private Set<Translation> translations;
-    public RadioBroadcaster(String name, Set<Experience> experiences, Set<Translation> translations) {
+    public RadioBroadcaster(String name,Set<Experience> experiences,Set<Translation> translations) {
         if(name.equals("")) throw new RadioBroadcasterCreationException();
         this.name = name;
         this.translations = translations;

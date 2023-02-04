@@ -10,7 +10,7 @@ public record Interview(@NonNull String interviewee, double minuteDuration, doub
     public Interview{
         if(interviewee.equals("") || minuteDuration <= 0) throw new InterviewCreationException();
     }
-    public Interview(String interviewee, double minuteDuration) {
+    public Interview(@NonNull String interviewee, double minuteDuration) {
         this(interviewee, minuteDuration, 30 * minuteDuration);
     }
 

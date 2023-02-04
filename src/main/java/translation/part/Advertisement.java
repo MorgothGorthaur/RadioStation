@@ -10,7 +10,7 @@ public record Advertisement(@NonNull String productName, double minuteDuration, 
     public Advertisement {
         if(productName.equals("") || minuteDuration <= 0) throw new AdvertisementCreationException();
     }
-    public Advertisement(String productName, double minuteDuration) {
+    public Advertisement(@NonNull String productName, double minuteDuration) {
         this(productName, minuteDuration, 5 * minuteDuration);
     }
 

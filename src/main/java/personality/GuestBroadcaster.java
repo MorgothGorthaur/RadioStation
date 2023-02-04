@@ -9,13 +9,15 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
-@NonNull
 @NoArgsConstructor
 public class GuestBroadcaster implements Broadcaster{
+    @NonNull
     private String name;
+    @NonNull
     private String resume;
+    @NonNull
     private Set<Translation> translations;
-    public GuestBroadcaster(String name, String resume, Set<Translation> translations) {
+    public GuestBroadcaster( String name,String resume,Set<Translation> translations) {
         if(name.equals("") || resume.equals("")) throw new GuestBroadcasterCreationException();
         this.name = name;
         this.resume = resume;
