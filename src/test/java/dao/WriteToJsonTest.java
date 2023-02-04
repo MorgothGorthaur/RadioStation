@@ -58,7 +58,7 @@ public class WriteToJsonTest {
 
     @Test
     void convertGuestBroadcasterToJson() throws JsonProcessingException {
-        var guest = new GuestBroadcaster("name", "resume", new LinkedHashSet<>(List.of(
+        var guest = new GuestBroadcaster("name", "resume", new ArrayList<>(List.of(
                 new TranslationImpl(180, 20,
                         new ArrayList<>(List.of(new Music("singer", "song", 20),
                                 new Interview("person", 5), new Advertisement("product", 6))))
@@ -70,7 +70,7 @@ public class WriteToJsonTest {
     @Test
     void convertRadioBroadcasterToJson() throws JsonProcessingException {
         var radio = new RadioBroadcaster("name", new LinkedHashSet<>(List.of(new WorkOnRadioExperienceImpl("radio", 5))),
-                new LinkedHashSet<>(List.of(
+                new ArrayList<>(List.of(
                         new TranslationImpl(180, 20,
                                 new ArrayList<>(List.of(new Music("singer", "song", 20),
                                         new Interview("person", 5), new Advertisement("product", 6))))

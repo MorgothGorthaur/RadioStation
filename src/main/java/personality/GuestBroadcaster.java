@@ -5,7 +5,9 @@ import lombok.*;
 import translation.Translation;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -16,14 +18,14 @@ public class GuestBroadcaster implements Broadcaster{
     @NonNull
     private String resume;
     @NonNull
-    private Set<Translation> translations;
-    public GuestBroadcaster( String name,String resume,Set<Translation> translations) {
+    private List<Translation> translations;
+    public GuestBroadcaster( String name,String resume,List<Translation> translations) {
         if(name.equals("") || resume.equals("")) throw new GuestBroadcasterCreationException();
         this.name = name;
         this.resume = resume;
         this.translations = translations;
     }
     public GuestBroadcaster(String name, String resume) {
-        this(name, resume, new LinkedHashSet<>());
+        this(name, resume, new ArrayList<>());
     }
 }
