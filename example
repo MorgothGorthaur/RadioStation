@@ -1,2 +1,2 @@
-{"@type":"GuestBroadcaster","name":"Victor","resume":"f","translations":[]}
+{"@type":"GuestBroadcaster","name":"Victor","resume":"f","translations":[{"@type":"TranslationImpl","price":162.5,"minuteDuration":20.0,"parts":[{"@type":"Music","singerName":"sing","musicName":"song","minuteDuration":5.0},{"@type":"Interview","interviewee":"interviewee","minuteDuration":5.0,"price":150.0},{"@type":"Music","singerName":"song","musicName":"sing","minuteDuration":2.5},{"@type":"Advertisement","productName":"product","minuteDuration":2.5,"price":12.5},{"@type":"Music","singerName":"sing","musicName":"song","minuteDuration":5.0}]}]}
 {"@type":"RadioBroadcaster","name":"Misha","experiences":[],"translations":[]}
