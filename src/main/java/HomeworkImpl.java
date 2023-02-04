@@ -2,7 +2,6 @@ import creators.broadcaster.BroadcasterCreatorFactory;
 import creators.broadcaster.BroadcasterCreatorFactoryImpl;
 import creators.translation.TranslationCreator;
 import creators.translation.TranslationCreatorImpl;
-import dao.JsonDaoImpl;
 import dao.RadioStationDao;
 import lombok.SneakyThrows;
 import personality.Broadcaster;
@@ -121,19 +120,18 @@ public class HomeworkImpl implements HomeWork {
 
 
     private void addToBroadcasters(Broadcaster broadcaster) {
-        if (broadcasters.containsKey(broadcaster.getName())) {
-            System.out.println("broadcaster with this name already exist");
-            System.out.print("do you want to rewrite?[y/n]");
-            if (yesNoHandler()) broadcasters.put(broadcaster.getName(), broadcaster);
-        } else broadcasters.put(broadcaster.getName(), broadcaster);
+        if (broadcasters.containsKey(broadcaster.getName()) && rewriteBroadcaster()) broadcasters.put(broadcaster.getName(), broadcaster);
+        else broadcasters.put(broadcaster.getName(), broadcaster);
     }
 
     @SneakyThrows
-    private boolean yesNoHandler() {
+    private boolean rewriteBroadcaster() {
+        System.out.println("broadcaster with this name already exist");
+        System.out.print("do you want to rewrite?[y/n]");
         return switch (reader.readLine()) {
             case "y" -> true;
             case "n" -> false;
-            default -> yesNoHandler();
+            default -> rewriteBroadcaster();
         };
     }
 
