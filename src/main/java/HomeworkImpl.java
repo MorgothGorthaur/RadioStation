@@ -55,14 +55,14 @@ public class HomeworkImpl implements HomeWork {
             System.out.println("your broadcaster: " + broadcaster );
             addToBroadcasters(updated);
         }
-        else System.out.println("broadcaster with this name " + name + "not founded!");
+        else System.out.println("broadcaster with this name " + name + " not founded!");
     }
 
     @Override
     public void removeBroadcaster() {
         var name = setName();
         var broadcaster = broadcasters.remove(name);
-        System.out.println(broadcaster != null ? "removed broadcaster " + broadcaster : "broadcaster with this name " + name + "not founded!");
+        System.out.println(broadcaster != null ? "removed broadcaster " + broadcaster : "broadcaster with this name " + name + " not founded!");
     }
 
     @Override
@@ -75,7 +75,7 @@ public class HomeworkImpl implements HomeWork {
         var name = setName();
         var broadcaster = broadcasters.get(name);
         if(broadcaster != null) getBroadcasterTypeHandler(broadcaster);
-        else System.out.println("broadcaster with name " + name + "not founded!");
+        else System.out.println("broadcaster with name " + name + " not founded!");
     }
 
     @Override
