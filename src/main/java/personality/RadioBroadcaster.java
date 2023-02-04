@@ -7,8 +7,11 @@ import personality.experience.Experience;
 import translation.Translation;
 
 
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,14 +22,14 @@ public class RadioBroadcaster implements Broadcaster{
     @NonNull
     private Set<Experience> experiences;
     @NonNull
-    private Set<Translation> translations;
-    public RadioBroadcaster(String name,Set<Experience> experiences,Set<Translation> translations) {
+    private List<Translation> translations;
+    public RadioBroadcaster(String name,Set<Experience> experiences,List<Translation> translations) {
         if(name.equals("")) throw new RadioBroadcasterCreationException();
         this.name = name;
         this.translations = translations;
         this.experiences = experiences;
     }
     public RadioBroadcaster(String name, Set<Experience> experiences) {
-        this(name, experiences, new LinkedHashSet<>());
+        this(name, experiences, new ArrayList<>());
     }
 }

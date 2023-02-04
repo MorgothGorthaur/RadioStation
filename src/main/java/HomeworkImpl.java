@@ -89,15 +89,15 @@ public class HomeworkImpl implements HomeWork {
 
     @SneakyThrows
     private void getRadioBroadcaster(RadioBroadcaster radioBroadcaster) {
-        System.out.println(getRadioBroadcasterMenu());
+        printRadioBroadcasterMenu();
         var line = "";
         while (!(line = reader.readLine()).equals("exit")){
-            System.out.println(switch (line) {
-                case "print name" ->  radioBroadcaster.getName();
-                case "print experiences" -> radioBroadcaster.getExperiences();
-                case "print translations" -> radioBroadcaster.getTranslations();
-                default -> getRadioBroadcasterMenu();
-            });
+            switch (line) {
+                case "print name" -> System.out.println(radioBroadcaster.getName());
+                case "print experiences" -> radioBroadcaster.getExperiences().forEach(System.out::println);
+                case "print translations" -> radioBroadcaster.getTranslations().forEach(System.out::println);
+                default -> printRadioBroadcasterMenu();
+            }
         }
     }
 
@@ -105,15 +105,15 @@ public class HomeworkImpl implements HomeWork {
 
     @SneakyThrows
     private void getGuestBroadcaster(GuestBroadcaster guestBroadcaster) {
-        System.out.println(getGuestBroadcasterMenu());
+        printGuestBroadcasterMenu();
         var line = "";
         while (!(line = reader.readLine()).equals("exit")) {
-            System.out.println(switch (line) {
-                case "print name" -> guestBroadcaster.getName();
-                case "print resume" -> guestBroadcaster.getResume();
-                case "print translations" -> guestBroadcaster.getTranslations();
-                default -> getGuestBroadcasterMenu();
-            });
+            switch (line) {
+                case "print name" -> System.out.println(guestBroadcaster.getName());
+                case "print resume" -> System.out.println(guestBroadcaster.getResume());
+                case "print translations" -> guestBroadcaster.getTranslations().forEach(System.out::println);
+                default -> printGuestBroadcasterMenu();
+            }
         }
     }
 
@@ -146,8 +146,8 @@ public class HomeworkImpl implements HomeWork {
         };
     }
 
-    private String getRadioBroadcasterMenu() {
-        return """
+    private void printRadioBroadcasterMenu() {
+        System.out.println("""
                 +++++++++++++++++++++++++++++++++++++++++++++++++
                 +         RadioBroadcaster menu                 +
                 + print name - for getting name                 +
@@ -155,10 +155,10 @@ public class HomeworkImpl implements HomeWork {
                 + print translations - for getting translations +
                 + exit - returns to main menu                   +
                 +++++++++++++++++++++++++++++++++++++++++++++++++
-                """;
+                """);
     }
-    private String getGuestBroadcasterMenu(){
-        return """
+    private void printGuestBroadcasterMenu(){
+        System.out.println("""
                 +++++++++++++++++++++++++++++++++++++++++++++++++                     
                 +         GuestBroadcaster menu                 +
                 + print name - for getting name                 +
@@ -166,7 +166,7 @@ public class HomeworkImpl implements HomeWork {
                 + print translations - for getting translations +
                 + exit - returns to main menu                   +
                 +++++++++++++++++++++++++++++++++++++++++++++++++
-                """;
+                """);
     }
 
     @SneakyThrows
