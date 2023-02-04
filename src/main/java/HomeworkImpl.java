@@ -112,7 +112,7 @@ public class HomeworkImpl implements HomeWork {
             System.out.println(switch (line) {
                 case "print name" -> guestBroadcaster.getName();
                 case "print resume" -> guestBroadcaster.getResume();
-                case "print translation" -> guestBroadcaster.getTranslations();
+                case "print translations" -> guestBroadcaster.getTranslations();
                 default -> getGuestBroadcasterMenu();
             });
         }
