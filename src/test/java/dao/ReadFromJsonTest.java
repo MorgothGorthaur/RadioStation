@@ -3,8 +3,10 @@ package dao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import personality.Broadcaster;
 import personality.GuestBroadcaster;
 import personality.RadioBroadcaster;
+import personality.experience.Experience;
 import personality.experience.WorkOnRadioExperienceImpl;
 import translation.Translation;
 import translation.TranslationImpl;
@@ -22,14 +24,14 @@ public class ReadFromJsonTest {
     void convertJsonToMusic() throws JsonProcessingException {
         var music = "{\"@type\":\"Music\",\"singerName\":\"singer\",\"musicName\":\"song\",\"minuteDuration\":20.0}";
         var expected = new Music("singer", "song", 20);
-        assertThat(mapper.readValue(music, Music.class)).isEqualTo(expected);
+        assertThat(mapper.readValue(music, Part.class)).isEqualTo(expected);
     }
 
     @Test
     void convertJsonToInterview() throws JsonProcessingException {
         var interview = "{\"@type\":\"Interview\",\"interviewee\":\"person\",\"minuteDuration\":5.0,\"price\":150.0}";
         var expected = new Interview("person", 5);
-        assertThat(mapper.readValue(interview, Interview.class)).isEqualTo(expected);
+        assertThat(mapper.readValue(interview, Part.class)).isEqualTo(expected);
     }
 
     @Test
@@ -49,32 +51,32 @@ public class ReadFromJsonTest {
     }
 
     @Test
-    void convertExperienceToJson() throws JsonProcessingException {
+    void convertJsonToExperience() throws JsonProcessingException {
         var experience = "{\"@type\":\"WorkOnRadioExperienceImpl\",\"stationName\":\"radio\",\"yearExperience\":5.0}";
         var expected = new WorkOnRadioExperienceImpl("radio", 5);
-        assertThat(mapper.writeValueAsString(experience)).isEqualTo(expected);
+        assertThat(mapper.readValue(experience, Experience.class)).isEqualTo(expected);
     }
 
     @Test
     void convertGuestBroadcasterToJson() throws JsonProcessingException {
-        var guest = new GuestBroadcaster("name", "resume", new LinkedHashSet<>(List.of(
+        var guest = "{\"@type\":\"GuestBroadcaster\",\"name\":\"name\",\"resume\":\"resume\",\"translations\":[{\"@type\":\"TranslationImpl\",\"price\":180.0,\"minuteDuration\":20.0,\"parts\":[{\"@type\":\"Music\",\"singerName\":\"singer\",\"musicName\":\"song\",\"minuteDuration\":20.0},{\"@type\":\"Interview\",\"interviewee\":\"person\",\"minuteDuration\":5.0,\"price\":150.0},{\"@type\":\"Advertisement\",\"productName\":\"product\",\"minuteDuration\":6.0,\"price\":30.0}]}]}";
+        var expected = new GuestBroadcaster("name", "resume", new LinkedHashSet<>(List.of(
                 new TranslationImpl(180, 20,
                         new ArrayList<>(List.of(new Music("singer", "song", 20),
                                 new Interview("person", 5), new Advertisement("product", 6))))
         )));
-        var expected = "{\"@type\":\"GuestBroadcaster\",\"name\":\"name\",\"resume\":\"resume\",\"translations\":[{\"@type\":\"TranslationImpl\",\"price\":180.0,\"minuteDuration\":20.0,\"parts\":[{\"@type\":\"Music\",\"singerName\":\"singer\",\"musicName\":\"song\",\"minuteDuration\":20.0},{\"@type\":\"Interview\",\"interviewee\":\"person\",\"minuteDuration\":5.0,\"price\":150.0},{\"@type\":\"Advertisement\",\"productName\":\"product\",\"minuteDuration\":6.0,\"price\":30.0}]}]}";
-        assertThat(mapper.writeValueAsString(guest)).isEqualTo(expected);
+        assertThat(mapper.readValue(guest, Broadcaster.class)).isEqualTo(expected);
     }
 
     @Test
     void convertRadioBroadcasterToJson() throws JsonProcessingException {
-        var radio = new RadioBroadcaster("name", new LinkedHashSet<>(List.of(new WorkOnRadioExperienceImpl("radio", 5))),
+        var radio ="{\"@type\":\"RadioBroadcaster\",\"name\":\"name\",\"experiences\":[{\"@type\":\"WorkOnRadioExperienceImpl\",\"stationName\":\"radio\",\"yearExperience\":5.0}],\"translations\":[{\"@type\":\"TranslationImpl\",\"price\":180.0,\"minuteDuration\":20.0,\"parts\":[{\"@type\":\"Music\",\"singerName\":\"singer\",\"musicName\":\"song\",\"minuteDuration\":20.0},{\"@type\":\"Interview\",\"interviewee\":\"person\",\"minuteDuration\":5.0,\"price\":150.0},{\"@type\":\"Advertisement\",\"productName\":\"product\",\"minuteDuration\":6.0,\"price\":30.0}]}]}";
+        var expected = new RadioBroadcaster("name", new LinkedHashSet<>(List.of(new WorkOnRadioExperienceImpl("radio", 5))),
                 new LinkedHashSet<>(List.of(
                         new TranslationImpl(180, 20,
                                 new ArrayList<>(List.of(new Music("singer", "song", 20),
                                         new Interview("person", 5), new Advertisement("product", 6))))
                 )));
-        var expected ="{\"@type\":\"RadioBroadcaster\",\"name\":\"name\",\"experiences\":[{\"@type\":\"WorkOnRadioExperienceImpl\",\"stationName\":\"radio\",\"yearExperience\":5.0}],\"translations\":[{\"@type\":\"TranslationImpl\",\"price\":180.0,\"minuteDuration\":20.0,\"parts\":[{\"@type\":\"Music\",\"singerName\":\"singer\",\"musicName\":\"song\",\"minuteDuration\":20.0},{\"@type\":\"Interview\",\"interviewee\":\"person\",\"minuteDuration\":5.0,\"price\":150.0},{\"@type\":\"Advertisement\",\"productName\":\"product\",\"minuteDuration\":6.0,\"price\":30.0}]}]}";
-        assertThat(mapper.writeValueAsString(radio)).isEqualTo(expected);
+        assertThat(mapper.readValue(radio, Broadcaster.class)).isEqualTo(expected);
     }
 }

@@ -38,13 +38,13 @@ public class TranslationBuilderTest {
 
     @Test
     void testBuild_shouldThrowAllTranslationTimeIsUsedException() {
-        assertThatThrownBy(() -> new TranslationImpl.Builder(1).addPart(new Music("f", "f", 5)))
+        assertThatThrownBy(() -> new TranslationImpl.Builder(1).addPart(new Music("f", "f", 5)).build())
                 .isInstanceOf(AllTranslationTimeIsUsedException.class);
     }
 
     @Test
     void testBuild_shouldThrowTooBigCommercialTimeException() {
-        assertThatThrownBy(() -> new TranslationImpl.Builder(4).addPart(new Interview("f", 3)))
+        assertThatThrownBy(() -> new TranslationImpl.Builder(4).addPart(new Interview("f", 3)).build())
                 .isInstanceOf(TooBigCommercialTimeException.class);
     }
 }
