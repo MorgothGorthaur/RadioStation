@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 @RequiredArgsConstructor
-public class StreamDaoImpl implements RadioStationDao {
+public class ByteDaoImpl implements RadioStationDao {
     private final String FILE_NAME;
 
     @Override

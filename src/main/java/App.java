@@ -2,11 +2,7 @@
 import dao.DaoFactory;
 import dao.DaoFactoryImpl;
 import dao.RadioStationDao;
-import dao.StreamDaoImpl;
 import lombok.SneakyThrows;
-import personality.GuestBroadcaster;
-import personality.RadioBroadcaster;
-import translation.part.Interview;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -33,7 +29,7 @@ public class App {
         System.out.print("json or byte?");
         return switch (reader.readLine()) {
             case "json" -> factory.getDao(DaoFactory.DaoType.JSON, fileName);
-            case "byte" -> factory.getDao(DaoFactory.DaoType.STREAM, fileName);
+            case "byte" -> factory.getDao(DaoFactory.DaoType.BYTE, fileName);
             default -> chooseDao();
         };
     }
